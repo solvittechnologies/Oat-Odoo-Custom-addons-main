@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leave_request_form" model="ir.ui.view">
+        <field name="name">view.leave.request.form</field>
+        <field name="model">fastra.leave.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="send_to_admin" string="Send to Admin" attrs="{'invisible':[('state','!=', 'draft')]}" class="oe_highlight" type="object"/>
+                    <button name="send_to_md" string="Send to MD"
+                            attrs="{'invisible':[('state','!=', 'send_to_admin')]}" class="oe_highlight"
+                            type="object"/>
+                    <button name="approve" string="Approve"
+                            attrs="{'invisible':[('state','!=', 'send_to_md')]}" class="oe_highlight"
+                            type="object"/>
+                     <button name="reject" string="Reject"
+                            attrs="{'invisible':[('state','!=', 'send_to_md')]}" class="oe_highlight"
+                            type="object"/>
+                    <field name="state" widget="statusbar" nolabel="1"
+                           statusbar_visible="draft,send_to_admin,send_to_md"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="staff_number"/>
+                            <field name="hr_employee_id"/>
+                            <field name="department"/>
+                            <field name="date"/>
+                            <field name="reject_reason" placeholder="Rejection reason" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Leave Lines">
+                            <field name="leave_line_ids">
+                                <tree string="Leave Details" editable="bottom">
+                                    <field name="leave_type_id"/>
+                                    <field name="leave_reasons"/>
+                                    <field name="leave_duration"/>
+                                    <field name="commencement_date"/>
+                                    <field name="resumption_date"/>
+                                    <field name="address_while_leave"/>
+                                    <field name="telephone"/>
+                                    <field name="relif_employee_id"/>
+                                    <field name="staff_sign" widget='image' style="max-width:100px;max-height:100px;"/>
+                                    <field name="hod_sign" widget='image' style="max-width:100px;max-height:100px;"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="FOR ADMIN DEPARTMENT ONLY">
+                            <group string="Total Leave Entitlement">
+                                <group>
+                                    <field name="arrears"/>
+                                    <field name="current"/>
+                                    <field name="total"/>
+                                </group>
+                                <group>
+                                    <field name="no_of_days_taken"/>
+                                    <field name="leave_balance"/>
+                                    <field name="leave_allowance"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="MD’S APPROVAL">
+                            <group string="Compensation &amp; Benefits">
+                                <group>
+                                    <field name="leave_allowance_due"/>
+                                    <field name="date_of_payment"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_leave_request_tree" model="ir.ui.view">
+        <field name="name">view.leave.request.tree</field>
+        <field name="model">fastra.leave.request</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Leave Request Tree">
+                <field name="staff_number"/>
+                <field name="hr_employee_id"/>
+                <field name="department"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hr_leave_request" model="ir.actions.act_window">
+        <field name="name">EMPLOYEE LEAVE REQUEST FORM</field>
+        <field name="res_model">fastra.leave.request</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Leave Management" id="menu_leave_management_root"
+              parent="hr_menus.hr_menus" sequence="5"/>
+
+    <menuitem name="Leave Request" id="menu_leave_request"
+              parent="fastra_hr_customize.menu_leave_management_root" action="action_hr_leave_request" sequence="10"/>
+</odoo>

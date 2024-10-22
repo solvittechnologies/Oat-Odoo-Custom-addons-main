@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_assessment_criteria_form" model="ir.ui.view">
+            <field name="name">view.assessment.criteria.form</field>
+            <field name="model">assessment.criteria</field>
+            <field name="arch" type="xml">
+                <form string="IMMEDIATE SUPERIOR">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="excellent"/>
+                            <field name="very_good"/>
+                            <field name="good"/>
+                            <field name="poor"/>
+                            <field name="very_poor"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_assessment_criteria_tree" model="ir.ui.view">
+            <field name="name">view.assessment.criteria.tree</field>
+            <field name="model">assessment.criteria</field>
+            <field name="arch" type="xml">
+                <tree string="IMMEDIATE SUPERIOR Tree" editable="top">
+                    <field name="name"/>
+                    <field name="excellent"/>
+                    <field name="very_good"/>
+                    <field name="good"/>
+                    <field name="poor"/>
+                    <field name="very_poor"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_assessment_criteria" model="ir.actions.act_window">
+            <field name="name">ASSESSMENT CRITERIA</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">assessment.criteria</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem name="Assessment Criteria"
+                  id="assessment_criteria_menu"
+                  parent="confirmation_menu_root"
+                  action="action_assessment_criteria"
+                  sequence="20"
+                  active="False"
+        />
+    </data>
+</odoo>

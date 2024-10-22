@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="fastra_work_order_form_view" model="ir.ui.view">
+            <field name="name">fastra.work.order.form.view</field>
+            <field name="model">fastra.work.order</field>
+            <field name="arch" type="xml">
+                <form string="Work Order Form">
+                    <header>
+                        <button name="send_to_subcontractor" string="Send to Subcontractor" attrs="{'invisible':[('state','!=', 'draft')]}" class="oe_highlight" type="object"/>
+                        <button name="send_to_project_coordinator" string="Send to Project Coordinator" attrs="{'invisible':[('state','!=', 'send_subcontractor')]}" class="oe_highlight"
+                                type="object"/>
+                        <button name="approve" string="Approve" attrs="{'invisible':[('state','!=', 'send_project_coordinator')]}" class="oe_highlight" type="object"/>
+                        <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,send_subcontractor,send_project_coordinator,approve"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" readonly="1" force_save="1" placeholder="W.O. #"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <label for="company_id"/>
+                                <div>
+                                    <field name="company_id"/>
+                                    <field name="company_partner_id" context="{'show_address': 1}" options="{'always_reload': True}" nolabel="1"/>
+                                </div>
+                                <field name="job"/>
+                                <field name="scope"/>
+                                <field name="rate"/>
+                                <field name="contract_sum"/>
+                            </group>
+
+                            <group>
+                                <field name="date"/>
+                                <field name="partner_id" context="{'show_address': 1}" options="{'always_reload': True}"/>
+                                <field name="customer_id"/>
+                                <label for="category_id"/>
+                                <div>
+                                    <field name="category_id" class="oe_inline"/>
+                                    <field name="category_text" class="oe_inline"/>
+                                </div>
+                            </group>
+                        </group>
+
+                        <label for="additional_details"/>
+                        <field name="additional_details"/>
+                        <div style="margin-bottom:30px;"/>
+
+                        <label for="line_a_ids" string="Part A"/>
+                        <field name="line_a_ids" nolabel="1">
+                            <tree string="Line A" editable="bottom">
+                                <field name="name"/>
+                                <field name="qty"/>
+                                <field name="completed"/>
+                                <field name="rate"/>
+                                <field name="total" sum="Total"/>
+                            </tree>
+                        </field>
+                        <div style="margin-bottom:30px;"/>
+
+                        <label for="line_b_ids" string="Part B"/>
+                        <field name="line_b_ids" nolabel="1">
+                            <tree string="Line B" editable="bottom">
+                                <field name="name"/>
+                                <field name="qty"/>
+                                <field name="unit_price"/>
+                                <field name="total" sum="Total"/>
+                            </tree>
+                        </field>
+                        <div style="margin-bottom:30px;"/>
+
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="work_order_total">
+                            <field name="advance_material_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="previous_payment" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                <label for="amount_due"/>
+                            </div>
+                            <field name="amount_due" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <field name="comment_line_ids" class="oe_inline" style="min-width:50%">
+                            <tree string="Comment Lines" editable="bottom">
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                        <div class="oe_clear"/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="fastra_work_order_tree_view" model="ir.ui.view">
+            <field name="name">fastra.work.order.tree.view</field>
+            <field name="model">fastra.work.order</field>
+            <field name="arch" type="xml">
+                <tree string="Work Order Tree">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="customer_id"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="fastra_work_order_act_window" model="ir.actions.act_window">
+            <field name="name">Work Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fastra.work.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Work Order"
+                  id="fastra_work_order_menu"
+                  parent="fastra_project_budget.menu_action_project_budget_root"
+                  action="fastra_work_order_act_window"
+                  sequence="1"
+        />
+
+    </data>
+</odoo>

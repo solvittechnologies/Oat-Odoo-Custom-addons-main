@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_exit_interview_form" model="ir.ui.view">
+            <field name="name">view.exit.interview.form</field>
+            <field name="model">exit.interview.form</field>
+            <field name="arch" type="xml">
+                <form string="Exit Interview Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="company_id"/>
+                                <field name="designation_id"/>
+                                <field name="exit_date"/>
+                            </group>
+                            <group>
+                                <field name="joining_date"/>
+                                <field name="location_id"/>
+                                <field name="email"/>
+                            </group>
+                        </group>
+
+                        <group string="A. Reason For Resignation? Kindly tick the most appropriate reason/reasons.">
+                            <field name="return_resignation_ids" nolabel="1">
+                                <tree string="Line" editable="bottom">
+                                    <field name="resignation_return_id"/>
+                                    <field name="comment"/>
+                                    <field name="is_yes" attrs="{'readonly': [('is_no', '=', True)]}"/>
+                                    <field name="is_no" attrs="{'readonly': [('is_yes', '=', True)]}"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="B. With specific reference to your experience within the company of your development, how do you rate the following factors?">
+                            <field name="exit_development_experience_ids" nolabel="1">
+                                <tree string="Line" editable="bottom">
+                                    <field name="exit_development_experience_id"/>
+                                    <field name="comment"/>
+                                    <field name="is_excellent"/>
+                                    <field name="is_very_good"/>
+                                    <field name="is_good"/>
+                                    <field name="is_poor"/>
+                                    <field name="remarks"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="General Work Culture">
+                            <field name="general_work_culture_ids" nolabel="1">
+                                <tree string="Line" editable="bottom">
+                                    <field name="reason"/>
+                                    <field name="comment"/>
+                                    <field name="is_excellent"/>
+                                    <field name="is_very_good"/>
+                                    <field name="is_good"/>
+                                    <field name="is_poor"/>
+                                    <field name="remarks"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Interpersonal Relations">
+                            <field name="inter_personal_relation_ids" nolabel="1">
+                                <tree string="Line" editable="bottom">
+                                    <field name="reason"/>
+                                    <field name="comment"/>
+                                    <field name="is_excellent"/>
+                                    <field name="is_very_good"/>
+                                    <field name="is_good"/>
+                                    <field name="is_poor"/>
+                                    <field name="remarks"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="C. Are there other important information you would like to share with us on your personal experience?">
+                            <field name="other_important_info" nolabel="1"/>
+                        </group>
+
+                        <group string="D. What did you find as most frustrating aspect of your job?">
+                            <field name="most_frustrating_aspect" nolabel="1"/>
+                        </group>
+
+                        <group string="E. What was the most satisfying aspect of your job?">
+                            <field name="most_satisfying_aspect" nolabel="1"/>
+                        </group>
+
+                        <group string="F. What could have made you to stay back with the Organisation?">
+                            <field name="stay_back_with_organisation" nolabel="1"/>
+                        </group>
+
+                        <group string="G. Would you consider returning to Dane Group?">
+                            <div name="returning">
+                                <field name="is_yes_return_dana_group"/>
+                                <label for="is_yes_return_dana_group" style="padding-right:10%;"/>
+                                <field name="is_no_return_dana_group"/>
+                                <label for="is_no_return_dana_group"/>
+                            </div>
+                        </group>
+
+                        <group string="H. Would you consider returning to a specific subsidiary with Dane Group?">
+                            <div name="returning_specific">
+                                <field name="is_yes_return_to_specific_subsidiary"/>
+                                <label for="is_yes_return_to_specific_subsidiary" style="padding-right:10%;"/>
+                                <field name="is_no_return_to_specific_subsidiary"/>
+                                <label for="is_no_return_to_specific_subsidiary"/>
+                            </div>
+                        </group>
+
+                        <group string="I. Would you recommend your friend/acquaintances to join Dana Group or its subsidiaries?">
+                            <div name="recommend">
+                                <field name="is_yes_recommend_to_friends"/>
+                                <label for="is_yes_recommend_to_friends" style="padding-right:10%;"/>
+                                <field name="is_no_recommend_to_friends"/>
+                                <label for="is_no_recommend_to_friends"/>
+                            </div>
+                        </group>
+
+                        <group string="J. In your opinion what are the 3 major strength of the company?">
+                            <div>
+                                <field name="major_strength_1" nolabel="1" placeholder="1. "/>
+                                <field name="major_strength_2" nolabel="1" placeholder="2. "/>
+                                <field name="major_strength_3" nolabel="1" placeholder="3. "/>
+                            </div>
+                        </group>
+
+                        <group string="K. In your opinion what are the 3 major area of improvement for the company?">
+                            <div>
+                                <field name="major_improvement_area_1" nolabel="1" placeholder="1. "/>
+                                <field name="major_improvement_area_2" nolabel="1" placeholder="2. "/>
+                                <field name="major_improvement_area_3" nolabel="1" placeholder="3. "/>
+                            </div>
+                        </group>
+
+                        <group string="L. Which industry are you joining?">
+                            <div name="joining">
+                                <field name="is_fmcg_sale"/>
+                                <label for="is_fmcg_sale" style="padding-right:10%;"/>
+                                <field name="is_hospitality"/>
+                                <label for="is_hospitality" style="padding-right:10%;"/>
+                                <field name="is_banking"/>
+                                <label for="is_banking" style="padding-right:10%;"/>
+                                <field name="is_automobile"/>
+                                <label for="is_automobile" style="padding-right:10%;"/>
+                                <field name="is_manufacturing"/>
+                                <label for="is_manufacturing" style="padding-right:10%;"/><br/>
+                                <field name="is_it"/>
+                                <label for="is_it" style="padding-right:10%;"/>
+                                <field name="is_engineering"/>
+                                <label for="is_engineering" style="padding-right:10%;"/>
+                                <field name="is_pharmaceutical"/>
+                                <label for="is_pharmaceutical" style="padding-right:10%;"/>
+                                <field name="is_other"/>
+                                <label for="is_other"/>
+                            </div>
+                        </group>
+
+                        <group string="M. Which designation have you been offered in the company you are joining?">
+                            <field name="new_company_designation_offer" nolabel="1"/>
+                        </group>
+
+                        <group string="N. How much percentage hike in your CTC have you gained?">
+                            <div name="hike">
+                                <field name="is_less_10"/>
+                                <label for="is_less_10" style="padding-right:10%;"/>
+                                <field name="is_10_15"/>
+                                <label for="is_10_15" style="padding-right:10%;"/>
+                                <field name="is_15_20"/>
+                                <label for="is_15_20" style="padding-right:10%;"/><br/>
+                                <field name="is_20_25"/>
+                                <label for="is_20_25" style="padding-right:10%;"/>
+                                <field name="is_25_30"/>
+                                <label for="is_25_30" style="padding-right:10%;"/>
+                                <field name="is_above_30"/>
+                                <label for="is_above_30" style="padding-right:10%;"/>
+                            </div>
+                        </group>
+
+                        <group string="O. What other benefits are being given to you aside your salary?">
+                            <field name="other_benefits_aside_salary" nolabel="1"/>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="interview_hr_id" string="Interview By(HR Officer / Exit Interviewer)"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_exit_interview_tree" model="ir.ui.view">
+            <field name="name">view.exit.interview.tree</field>
+            <field name="model">exit.interview.form</field>
+            <field name="arch" type="xml">
+                <tree string="Exit Interview Tree">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="designation_id"/>
+                    <field name="joining_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="exit_interview_act_window" model="ir.actions.act_window">
+            <field name="name">Exit Interview Form</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exit.interview.form</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--<menuitem name="Exit Interview Form" id="exit_interview_menu"
+                  parent="hr_menus.hr_menus" action="exit_interview_act_window"/>-->
+
+    </data>
+</odoo>

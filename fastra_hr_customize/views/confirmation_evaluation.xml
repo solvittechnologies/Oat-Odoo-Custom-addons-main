@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_confirmation_evaluation_form" model="ir.ui.view">
+            <field name="name">view.hr.confirmation.evaluation.form</field>
+            <field name="model">hr.confirmation.evaluation</field>
+            <field name="arch" type="xml">
+                <form string="Confirmation Evaluation Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="reviewer_employee_id"/>
+                                <field name="date_of_employment"/>
+                                <field name="date_of_evaluation"/>
+                                <field name="time_evaluation_covers"/>
+                                <field name="person_evaluated_befor"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Employee Performance">
+                                <field name="work_product_ids">
+                                    <tree string="Work Product" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="dependability_ids">
+                                    <tree string="DEPENDABILITY" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="cooperativeness_ids">
+                                    <tree string="COOPERATIVENESS" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="adaptability_ids">
+                                    <tree string="ADAPTABILITY" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <group>
+                                    <group>
+                                        <field name="total_score_1"/>
+                                    </group>
+                                </group>
+
+                                <field name="communication_ids">
+                                    <tree string="COMMUNICATION" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="dm_ps_ids">
+                                    <tree string="DECISION MAKING AND PROBLEM SOLVING" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="improvement_ids">
+                                    <tree string="IMPROVEMENT" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="tools_materials_ids">
+                                    <tree string="USE OF TOOLS AND MATERIALS" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <group>
+                                    <group>
+                                        <field name="total_score_2"/>
+                                    </group>
+                                </group>
+
+                                <label for="example_problem_resolve"/>
+                                <field name="example_problem_resolve"/>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="person_improvement"/>
+                                <field name="person_improvement"/>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="person_excel"/>
+                                <field name="person_excel"/>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="is_person_extra_training"/>
+                                <field name="is_person_extra_training"/>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="is_promotion_this_year"/>
+                                <field name="is_promotion_this_year"/>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="person_goal"/>
+                                <field name="person_goal"/>
+                                <div style="margin-bottom:30px;"/>
+                            </page>
+                            <page string="HEAD OF DEPARTMENT">
+                                <field name="organizational_leadership_ids">
+                                    <tree string="ORGANIZATIONAL LEADERSHIP" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="positional_leadership_ids">
+                                    <tree string="POSITIONAL LEADERSHIP" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="interpersonal_leadership_ids">
+                                    <tree string="HUMAN’S AND INTERPERSONAL LEADERSHIP" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="professional_leadership_ids">
+                                    <tree string="PROFESSIONAL LEADERSHIP" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <field name="relationship_management_ids">
+                                    <tree string="RELATIONSHIP WITH MANAGEMENT" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="rate"/>
+                                    </tree>
+                                </field>
+
+                                <label for="hr_person_improvement"/>
+                                <field name="hr_person_improvement"/>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="hr_person_excel"/>
+                                <field name="hr_person_excel"/>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="hr_is_person_extra_training"/>
+                                <field name="hr_is_person_extra_training"/>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="hr_is_promotion_this_year"/>
+                                <field name="hr_is_promotion_this_year"/>
+                                <div style="margin-bottom:30px;"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_confirmation_evaluation_tree" model="ir.ui.view">
+            <field name="name">view.hr.confirmation.evaluation.tree</field>
+            <field name="model">hr.confirmation.evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="Confirmation Evaluation Tree">
+                    <field name="employee_id"/>
+                    <field name="reviewer_employee_id"/>
+                    <field name="date_of_employment"/>
+                    <field name="date_of_evaluation"/>
+                    <field name="time_evaluation_covers"/>
+                    <field name="person_evaluated_befor"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_confirmation_evaluation_act_window" model="ir.actions.act_window">
+            <field name="name">Confirmation Evaluation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.confirmation.evaluation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Confirmation Evaluation"
+                  id="confirmation_menu_root"
+                  parent="hr_menus.hr_menus"
+                  sequence="50"/>
+
+        <menuitem name="Confirmation Evaluation"
+                  id="confirmation_menu"
+                  parent="confirmation_menu_root"
+                  action="hr_confirmation_evaluation_act_window"
+                  sequence="10"
+        />
+
+    </data>
+</odoo>

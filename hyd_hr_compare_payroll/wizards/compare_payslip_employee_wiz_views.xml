@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		
+		<record id="compare_payslip_employee_wiz_view" model="ir.ui.view">
+			<field name="name">Compare payslip for employee</field>
+			<field name="model">hyd_hr_compare_payroll.compare_payslip_employee_wiz</field>
+			<field name="arch" type="xml">
+				<form >
+					<group col="4" colspan="4">
+						<label for="date_start1" string="Period 1" />
+						<div >
+							<field name="date_start1" class="oe_inline"/> to <field name="date_end1" class="oe_inline"/>
+						</div>
+						<label for="date_start2" string="Period 2" />
+						<div >
+							<field name="date_start2" class="oe_inline"/> to <field name="date_end2" class="oe_inline"/>
+						</div>
+					</group>
+					<group colspan="4">
+						<field name="all_employee" colspan="2"/>
+						<field name="employees" attrs="{'invisible': [('all_employee', '=', True)], 'required': [('all_employee', '=', False)]}"/>
+					</group>
+					<group colspan="4">
+						<field name="select_rules" colspan="2"/>
+						<field name="rules" attrs="{'invisible': [('select_rules', '!=', 'select')], 'required': [('select_rules', '=', 'select')]}"/>
+					</group>
+					<footer>
+						<button name="print_report" type="object" string="Print" class="oe_highlight"/>
+						or
+						<button string="Cancel" class="oe_highlight" special="cancel"/>
+					</footer>
+				</form>
+				
+			</field>
+		</record>
+
+		<record id="compare_payslip_employee_wiz_action" model="ir.actions.act_window">
+			<field name="name">Compare payslip for employee</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">hyd_hr_compare_payroll.compare_payslip_employee_wiz</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		
+		<menuitem 
+			name="Compare payslip employee"
+			id="menu_hr_payroll_root_report_comparative_employee"
+			parent="hyd_hr_compare_payroll.menu_hr_payroll_root_report"
+			action="compare_payslip_employee_wiz_action"/> 
+		 
+	</data>
+</openerp>

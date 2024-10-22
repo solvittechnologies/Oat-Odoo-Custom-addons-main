@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_training_plans_tree" model="ir.ui.view">
+        <field name="name">view.training.plans.tree</field>
+        <field name="model">training.plans</field>
+        <field name="arch" type="xml">
+            <tree string="TRAINING PLANS">
+                <field name="name_of_organizer"/>
+                <field name="months"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_training_plans_form" model="ir.ui.view">
+        <field name="name">view.training.plans.form</field>
+        <field name="model">training.plans</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name_of_organizer"/>
+                            <field name="date"/>
+                            <field name="months"/>
+                            <field name="location"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                         <page string="Lines" name="lines">
+                            <field name="training_plans_line_ids" nolabel="1">
+                                <tree string="Custom Lines" editable="bottom">
+                                    <field name="from_date"/>
+                                    <field name="to_date"/>
+                                    <field name="training_topic"/>
+                                    <field name="staff_name"/>
+                                    <field name="staff_designation"/>
+                                    <field name="trainer_name"/>
+                                    <field name="trainer_designation"/>
+                                    <field name="trainer_objective"/>
+                                    <field name="budgeted"/>
+                                    <field name="itf_Registered"/>
+                                    <field name="in_the_training_calender"/>
+                                    <field name="nos_of_participants"/>
+                                    <field name="certificate_issue"/>
+                                </tree>
+                            </field>
+                         </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_training_plans" model="ir.actions.act_window">
+        <field name="name">TRAINING PLANS</field>
+        <field name="res_model">training.plans</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--<menuitem name="Training" id="menu_training_plan_main"
+              parent="hr_menus.hr_menus" sequence="100"/>-->
+
+    <!--<menuitem name="Training" id="menu_training_plan"
+              parent="menu_training_plan_main" action="action_training_plans" sequence="10"/>-->
+</odoo>

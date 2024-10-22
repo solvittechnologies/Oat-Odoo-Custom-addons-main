@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="fastra_preliminaries_form_view" model="ir.ui.view">
+            <field name="name">fastra.preliminaries.form.view</field>
+            <field name="model">fastra.preliminaries</field>
+            <field name="arch" type="xml">
+                <form string="Fastra Preliminaries">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="project_id"/>
+                                <field name="project_manager_id"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="line" string="Lines">
+                                <field name="line_ids" nolabel="1">
+                                    <tree string="Lines" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="qty"/>
+                                        <field name="rate"/>
+                                        <field name="unit_id"/>
+                                        <field name="amount" sum="Total"/>
+                                    </tree>
+                                </field>
+                                <div style="margin-bottom:30px;"/>
+
+                                <label for="summary_line_ids" string="Summary"/>
+                                <field name="summary_line_ids" nolabel="1">
+                                    <tree string="Summary" editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="fastra_preliminaries_tree_view" model="ir.ui.view">
+            <field name="name">fastra.preliminaries.tree.view</field>
+            <field name="model">fastra.preliminaries</field>
+            <field name="arch" type="xml">
+                <tree string="Fastra preliminaries Tree">
+                    <field name="project_id"/>
+                    <field name="project_manager_id"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="fastra_preliminaries_act_window" model="ir.actions.act_window">
+            <field name="name">Preliminaries</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fastra.preliminaries</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Preliminaries"
+                  id="fastra_preliminaries_menu"
+                  parent="fastra_project_budget.master_data_menu_root"
+                  sequence="14"
+                  action="fastra_preliminaries_act_window"/>
+    </data>
+</odoo>

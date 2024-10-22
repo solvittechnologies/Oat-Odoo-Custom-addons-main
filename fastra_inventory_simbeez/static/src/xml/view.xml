@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<template id="asset_schedule_template" xml:space="preserve">
+    <t t-name="fastra_inventory_simbeez.assetSchedule">
+        <div class="oh_dashboards m-3">
+            <div class="container-fluid o_pj_dashboard m-0 p-0">
+            </div>
+        </div>
+    </t>
+    <t t-name="fastra_inventory_simbeez.assetSchedulereport">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">S/N</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Opening Qty.</th>
+
+                    <th scope="col">Qty .IN</th>
+                    <th scope="col">Qty Out</th>
+                    <th scope="col">Closing Qty.</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>List of Equipments</td>
+                    <td></td>
+                    <td></td>
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                </tr>
+            </tbody>
+        </table>
+    </t>
+</template>
+
+<!-- <template id="asset_schedulereport_template"> 
+        <t t-name="fastra_inventory_simbeezassetSchedulereport">
+            <p>ok</p>
+        </t>
+    </template> -->

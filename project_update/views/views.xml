@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="project_update" model="ir.ui.view">
+            <field name="name">project update</field>
+            <field name="model">fastra.project.analysis</field>
+            <field name="inherit_id" ref="fastra_project_budget.view_fastra_project_budget_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='other_payments']" position="after">
+                    <page string="Project Payroll">
+                        <field name="custom_project_id">
+                            <tree edit="0">
+                                <field name="employee_id"/>
+                                <field name="bank_account_number"/>
+                                <field name="gross_pay"/>
+                                <field name="sucharge"/>
+                                <field name="tax"/>
+                                <field name="employee_pension"/>
+                                <field name="net_pay"/>
+                                <field name="incentive"/>
+                                <field name="total"/>
+                            </tree>
+                        </field>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+<!--        <record id="custom_id" model="ir.ui.view">-->
+<!--            <field name="name">custom</field>-->
+<!--            <field name="model">hr.payslip.custom</field>-->
+<!--            <field name="inherit_id" ref="fastra_hr_customize.view_hr_payslip_custom_form"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="///field[@name='location_id']" position="after">-->
+<!--                    <field name="location"/>-->
+<!--                </xpath>-->
+
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

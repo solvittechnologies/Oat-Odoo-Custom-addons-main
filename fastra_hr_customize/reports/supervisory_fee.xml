@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="paperformat_supervisory_fee_report" model="report.paperformat">
+        <field name="name">Supervisory Fee Report</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_right">7</field>
+        <field name="margin_left">7</field>
+        <field name="header_line" eval="True"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="supervisory_fee_report"
+            model="supervisory.fee.line"
+            string="Supervisory Fee"
+            report_type="qweb-pdf"
+            name="fastra_hr_customize.supervisory_fee_report_view"
+            paperformat="fastra_hr_customize.paperformat_supervisory_fee_report"
+            menu="False"
+            print_report_name="'Supervisory Fee Report - %s' % object.employe_id.name"/>
+
+
+    <template id="supervisory_fee_report_view">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout_boxed">
+
+                <main>
+                    <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                    <div class="page">
+                        <div style="padding-top:40px">
+                            <h2>Pay Slip</h2>
+                            <p>Salary Slip of
+                                <span>
+                                    <t t-esc="docs.employee_id.name"/>
+                                </span>
+                            </p>
+                            <p>
+                                <t t-esc="company.name"/>
+                            </p>
+                        </div>
+                        <table class="table table-sm o_main_table">
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <t t-esc="docs.employee_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>
+                                    <t t-esc="docs.employee_id.work_location  "/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Month</th>
+                                <td>
+                                    <t t-esc="docs.supervisory_fee_id.month"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>
+                                    <t t-esc="docs.employee_id.work_email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Period</th>
+                                <td>
+                                    <t t-esc="docs.supervisory_fee_id.date_from"/>
+                                    <span>-</span>
+                                    <t t-esc="docs.supervisory_fee_id.date_to"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <h2>Details by Salary Rule Category</h2>
+
+                        <table class="table table-sm o_main_table">
+                            <tr>
+                                <th>Code</th>
+                                <th>SALARY RULE CATEGORY</th>
+                                <th>TOTAL</th>
+                            </tr>
+                            <t t-if="getwizardValue.gross_pay">
+                                <tr>
+                                    <td>GP</td>
+                                    <td>Gross Pay</td>
+                                    <td>
+                                        <t t-esc="docs.gross_pay" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="getwizardValue.wht">
+                                <tr>
+                                    <td>WHT</td>
+                                    <td>WHT</td>
+                                    <td>
+                                        <t t-esc="docs.wht" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="getwizardValue.sucharge">
+                                <tr>
+                                    <td>SC</td>
+                                    <td>Surcharge</td>
+                                    <td>
+                                        <t t-esc="docs.sucharge" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="getwizardValue.net_pay">
+                                <tr>
+                                    <td>NET</td>
+                                    <td>Net Pay</td>
+                                    <td>
+                                        <t t-esc="docs.net_pay"
+                                           t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                        </table>
+                    </div>
+                </main>
+            </t>
+        </t>
+
+    </template>
+
+
+</odoo>

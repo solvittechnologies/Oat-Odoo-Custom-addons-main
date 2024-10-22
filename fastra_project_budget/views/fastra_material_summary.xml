@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="fastra_material_summary_tree_view" model="ir.ui.view">
+            <field name="name">fastra.material.summary.tree</field>
+            <field name="model">fastra.material.summary</field>
+            <field name="arch" type="xml">
+                <tree string="Fastra Material Summary Tree" editable="top">
+                    <field name="name"/>
+                    <field name="qty"/>
+                    <field name="unit_id"/>
+                    <field name="rate"/>
+                    <field name="amount"/>
+                    <field name="remark"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="fastra_material_summary_act_window" model="ir.actions.act_window">
+            <field name="name">Material Summary</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fastra.material.summary</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem name="Material Summary"
+                  id="fastra_material_summary_menu"
+                  parent="fastra_project_budget.master_data_menu_root"
+                  action="fastra_material_summary_act_window" sequence="15"/>
+
+    </data>
+</odoo>

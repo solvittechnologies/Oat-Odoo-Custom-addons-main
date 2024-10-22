@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List view for Asset Schedule -->
+        <record id="view_asset_schedule_tree" model="ir.ui.view">
+            <field name="name">asset.schedule.tree</field>
+            <field name="model">asset.schedule</field>
+            <field name="arch" type="xml">
+                <tree string="Asset Schedule" create="0" edit="0">
+                    <field name="product_id" />
+                    <field name="code" />
+                    <field name="opening_qty" />
+                    <field name="qty_in" />
+                    <field name="qty_out" />
+                    <field name="closing_qty" />
+                    <field name="status" />
+                    <field name="remarks" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for Asset Schedule -->
+        <record id="ir_actions_server_asset_schedule" model="ir.actions.server">
+            <field name="name">Asset Schedule</field>
+            <field name="model_id" ref="fastra_inventory_simbeez.model_asset_schedule"/>
+            <field name="state">code</field>
+            <field name="code">action = model.get_repport_data()</field>
+        </record>
+
+        <menuitem id="menu_asset_schedule_stock_reporting"
+                  name="Asset Schedule"
+                  action="ir_actions_server_asset_schedule"
+                  sequence="200"
+                  parent="stock.menu_warehouse_report" />
+
+        <!-- Inherit view adn add field-->
+        <record id="request_inventory_from_inherit" model="ir.ui.view">
+            <field name="name">request.of.inventory.from.inherit</field>
+            <field name="model">inventory.request</field>
+            <field name="inherit_id" ref="fastra_inventory_simbeez.request_inventory_from" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='request_lines']/tree/field[@name='product_id']" position="after">
+                    <field name="product_category_id" />
+                    <field name="code" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

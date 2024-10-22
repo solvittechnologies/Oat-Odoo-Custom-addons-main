@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+    	<record model="ir.module.category" id="module_category_hr_customize">
+	        <field name="name">Leave Request</field>
+	        <field name="sequence">10</field>
+	    </record>
+
+	    <record id="group_hr_customize_hod" model="res.groups">
+	        <field name="name">HOD</field>
+	        <field name="category_id" ref="module_category_hr_customize"/>
+	    </record>
+
+	    <record id="group_hr_customize_hr" model="res.groups">
+	        <field name="name">HR</field>
+	        <field name="category_id" ref="module_category_hr_customize"/>
+	    </record>
+
+		<record id="group_hr_customize_md" model="res.groups">
+	        <field name="name">MD</field>
+			<field name="category_id" ref="module_category_hr_customize"/>
+	    </record>
+
+		<record id="group_show_payroll_menu" model="res.groups">
+			<field name="name">Show Payroll</field>
+		</record>
+
+		<record id="group_accounting_officer" model="res.groups">
+			<field name="name">Account Officer</field>
+			<field name="category_id" ref="base.module_category_accounting_and_finance"/>
+		</record>
+
+		<!--	HR company Rule
+		<record id="hr_leave_request_company_rule" model="ir.rule">
+		    <field name="name">HR Leave Request Company Rule</field>
+		    <field ref="fastra_hr_customize.model_fastra_leave_request" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>-->
+
+		<record id="hr_payslip_custom_company_rule" model="ir.rule">
+		    <field name="name">HR Payslip Custom Company Rule</field>
+		    <field ref="fastra_hr_customize.model_hr_payslip_custom" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>
+
+		<record id="hr_salary_excel_sheet_company_rule" model="ir.rule">
+		    <field name="name">HR Salary Excel Sheet Company Rule</field>
+		    <field ref="fastra_hr_customize.model_salaries_excel_sheet" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>
+
+		<record id="hr_exit_interview_form_company_rule" model="ir.rule">
+		    <field name="name">HR Exit Interview Form Company Rule</field>
+		    <field ref="fastra_hr_customize.model_exit_interview_form" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>
+
+		<!--<record id="hr_confirmation_evaluation_company_rule" model="ir.rule">
+		    <field name="name">HR Confirmation Evaluation Company Rule</field>
+		    <field ref="fastra_hr_customize.model_hr_confirmation_evaluation" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>-->
+
+		<record id="hr_training_plans_company_rule" model="ir.rule">
+		    <field name="name">HR Training Plans Company Rule</field>
+		    <field ref="fastra_hr_customize.model_training_plans" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>
+
+		<record id="hr_training_feedback_form_company_rule" model="ir.rule">
+		    <field name="name">HR Training Feedback Form Company Rule</field>
+		    <field ref="fastra_hr_customize.model_training_feedback_form" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>
+
+		<record id="hr_employee_loan_company_rule" model="ir.rule">
+		    <field name="name">HR Employee Loan Company Rule</field>
+		    <field ref="fastra_hr_customize.model_employee_loan" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>
+
+		<record id="hr_employee_workers_company_rule" model="ir.rule">
+		    <field name="name">HR Skill Workers Company Rule</field>
+		    <field ref="fastra_hr_customize.model_skilled_workers" name="model_id"/>
+		    <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>
+
+	</data>
+</odoo>

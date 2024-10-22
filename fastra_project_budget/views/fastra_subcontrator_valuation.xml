@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="fastra_subcontrator_valuation_form_view" model="ir.ui.view">
+            <field name="name">fastra.subcontrator.valuation.form.view</field>
+            <field name="model">fastra.subcontrator.valuation</field>
+            <field name="arch" type="xml">
+                <form string="Fastra Subcontrator Valuation Form">
+                    <header>
+                        <button name="send_to_project_coordinator" string="Send to Project Coordinator" attrs="{'invisible':[('state','!=', 'draft')]}" class="oe_highlight"
+                                type="object"/>
+                        <button name="approve" string="Approve" attrs="{'invisible':[('state','!=', 'send_project_coordinator')]}" class="oe_highlight" type="object"/>
+                        <button name="reject" string="Reject" attrs="{'invisible':[('state','!=', 'send_project_coordinator')]}" type="object"/>
+                        <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,send_project_coordinator,approve"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <label for="company_id"/>
+                                <div>
+                                    <field name="company_id"/>
+                                    <field name="company_partner_id" context="{'show_address': 1}" options="{'always_reload': True}" nolabel="1"/>
+                                </div>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="work_order_id"/>
+                                <field name="rejection_note" attrs="{'invisible': [('state', '!=', 'reject')]}"/>
+                            </group>
+                            <group>
+                                <field name="agree_contract_sum"/>
+                                <field name="contract_duration"/>
+                                <field name="value_of_work_done"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="line" string="Lines">
+                                <field name="line_ids" nolabel="1">
+                                    <tree string="Lines" editable="bottom">
+                                        <field name="no"/>
+                                        <field name="name"/>
+                                        <field name="qty"/>
+                                        <field name="rate"/>
+                                        <field name="amount" sum="Total"/>
+                                    </tree>
+                                </field>
+
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="work_order_total">
+                                    <field name="total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="retention" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="balance_after_retention"/>
+                                    </div>
+                                    <field name="balance_after_retention" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="previous_payment" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="amount_due"/>
+                                    </div>
+                                    <field name="amount_due" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <div class="oe_clear"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="fastra_subcontrator_valuation_tree_view" model="ir.ui.view">
+            <field name="name">fastra.subcontrator.valuation.tree.view</field>
+            <field name="model">fastra.subcontrator.valuation</field>
+            <field name="arch" type="xml">
+                <tree string="Fastra Subcontrator Valuation Tree">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="work_order_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="fastra_subcontrator_valuation_act_window" model="ir.actions.act_window">
+            <field name="name">Subcontractor Valuation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fastra.subcontrator.valuation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Subcontractor Valuation"
+                  id="fastra_subcontrator_valuation_menu"
+                  parent="fastra_project_budget.menu_action_project_budget_root"
+                  sequence="1"
+                  action="fastra_subcontrator_valuation_act_window"/>
+
+
+        <record id="view_fastra_subcontrator_valuation_reject_form" model="ir.ui.view">
+            <field name="name">fastra.subcontrator.valuation.reject.form</field>
+            <field name="model">fastra.subcontrator.valuation.reject</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="note" required="1"/>
+                    </group>
+                    <footer>
+                        <button string='Reject' name="reject" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

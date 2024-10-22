@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_fastra_project_budget_form_new" model="ir.ui.view">
+            <field name="name">view.fastra.project.budget.form.new</field>
+            <field name="model">fastra.project.budget</field>
+            <field name="arch" type="xml">
+                <form string="Fastra Project Budget Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="analytic_account_id"/>
+                                <field name="manager_id"/>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="budget_cost_amount"/>
+                                <field name="actual_cost_amount"/>
+                                <field name="net_cost_amount"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Budget line" name="budget_line">
+                                <field name="line_ids" nolable="1">
+                                    <tree string="budget line tree" editable="bottom">
+                                        <field name="item"/>
+                                        <field name="prelims_category_id"/>
+                                        <field name="category_id"/>
+                                        <field name="subcategory_id"/>
+                                        <field name="description"/>
+                                        <field name="uom_id"/>
+                                        <field name="qty"/>
+                                        <field name="material_uom_custom_id"/>
+                                        <field name="material_qty"/>
+                                        <field name="labor_rate"/>
+                                        <field name="material_rate"/>
+                                        <field name="material_amount"/>
+                                        <field name="labor_amount"/>
+                                        <field name="specialize_worker"/>
+                                        <field name="total"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Cost Tracking" name="cost_tracking">
+                                <field name="cost_line_ids" nolable="1">
+                                    <tree string="Cost line tree" editable="bottom">
+                                        <field name="prelims_category_id"/>
+                                        <field name="project_element_category_id"/>
+                                        <field name="subcategory_id"/>
+                                        <field name="description"/>
+                                        <field name="actual_material_qty"/>
+                                        <field name="actual_material_rate"/>
+                                        <field name="actual_material_amount" sum="Total"/>
+                                        <field name="actual_labor_amount" sum="Total"/>
+                                        <field name="actual_subcontractor_amount" sum="Total"/>
+                                        <field name="total_actual_cost" sum="Total"/>
+                                        <field name="budget_saving" sum="Total" invisible="1"/>
+                                        <field name="actual_saving" sum="Total" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_fastra_project_budget_tree_new" model="ir.ui.view">
+            <field name="name">view.fastra.project.budget.tree.new</field>
+            <field name="model">fastra.project.budget</field>
+            <field name="arch" type="xml">
+                <tree string="Fastra Project Budget">
+                    <field name="date"/>
+                    <field name="analytic_account_id"/>
+                    <field name="manager_id"/>
+		    <field name="net_cost_amount"/>
+                    <field name="budget_cost_amount"/>
+                    <field name="actual_cost_amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="fastra_project_budget_act_window" model="ir.actions.act_window">
+            <field name="name">Project Budget</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fastra.project.budget</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Project Budget"
+                  id="menu_action_fastra_project_budget"
+                  action="fastra_project_budget_act_window"
+                  parent="fastra_project_budget.menu_action_project_budget_root"
+                  web_icon="fastra_project_budget,static/description/icon.jpeg"
+                  sequence="1"/>
+
+        <record id="view_fastra_project_budget_line_form_new" model="ir.ui.view">
+            <field name="name">view.fastra.project.budget.line.form.new</field>
+            <field name="model">fastra.project.budget.line</field>
+            <field name="arch" type="xml">
+                <form string="Fastra Project Budget line Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="analytic_account_id"/>
+                                <field name="item"/>
+                                <field name="category_id"/>
+                                <field name="subcategory_id"/>
+                                <field name="description"/>
+                                <field name="uom_id"/>
+                            </group>
+                            <group>
+                                <field name="qty"/>
+                                <field name="material_uom_custom_id"/>
+                                <field name="material_qty"/>
+                                <field name="labor_rate"/>
+                                <field name="material_rate"/>
+                                <field name="material_amount"/>
+                                <field name="labor_amount"/>
+                                <field name="specialize_worker"/>
+                                <field name="total"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Line View  -->
+        <record id="view_fastra_project_budget_line_tree_new" model="ir.ui.view">
+            <field name="name">view.fastra.project.budget.line.tree.new</field>
+            <field name="model">fastra.project.budget.line</field>
+            <field name="arch" type="xml">
+                <tree string="Fastra Project Budget Line" create="1" edit="1" delete="1">
+                    <field name="analytic_account_id"/>
+                    <field name="item"/>
+                    <field name="category_id"/>
+                    <field name="subcategory_id"/>
+                    <field name="description"/>
+                    <field name="uom_id"/>
+                    <field name="qty"/>
+                    <field name="material_uom_custom_id"/>
+                    <field name="material_qty"/>
+                    <field name="material_rate"/>
+                    <field name="material_amount"/>
+                    <field name="labor_amount"/>
+                    <field name="specialize_worker"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="fastra_project_budget_line_act_window" model="ir.actions.act_window">
+            <field name="name">Project Budget Line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fastra.project.budget.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Project Budget Line"
+                  id="menu_action_fastra_project_budget_line"
+                  action="fastra_project_budget_line_act_window"
+                  parent="fastra_project_budget.master_data_menu_root"
+                  sequence="10"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="report_training_feedback_report"
+                model="training.feedback.form"
+                string="Training Feedback"
+                name="fastra_hr_customize.report_training_feedback_view"
+                file="fastra_hr_customize.report_training_feedback_view"
+                report_type="qweb-pdf"/>
+
+        <template id="report_training_feedback_view">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <center><h2>Training Feedback Report</h2></center>
+                            <div class="row mt32 mb32" name="info">
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Name:</strong>
+                                    <p class="m-0" t-field='doc.name'/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Designation:</strong>
+                                    <p class="m-0" t-field="doc.designation"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Location:</strong>
+                                    <p class="m-0" t-field="doc.location"/>
+                                </div>
+                            </div>
+
+                            <div>
+                                <span><b>Did the course meet your learning objectives?</b></span>
+                                <p t-field="doc.did_the_course_meet"/>
+
+                                <span><b>How was the duration of the course?</b></span>
+                                <p t-field="doc.how_was_the_duration_of_the_course"/>
+
+                                <span><b>How helpful were the instructional materials?</b></span>
+                                <p t-field="doc.how_helpful_were_the_instructional_materials"/>
+
+                                <span><b>Will you recommend this materials to others?</b></span>
+                                <p t-field="doc.will_you_recommend_this_materials_to_others"/>
+
+                                <span><b>How would you rate the overall training?</b></span>
+                                <p t-field="doc.rate_the_overall_training"/>
+
+                                <span><b>How would you rate the Facilitators oral explanations to the lecture materials?</b></span>
+                                <p t-field="doc.the_facilitators_oral_explanations_to_the_lecture_materials"/>
+
+                                <span><b>How well did the instructor answer questions from the audience?</b></span>
+                                <p t-field="doc.instructor_answer_questions_from_the_audience"/>
+
+                                <span><b>After this training, do you think you can handle the assigned task? (i.e) perform the functions as trained.</b></span>
+                                <p t-field="doc.after_training_you_can_handle_the_assigned_task"/>
+
+                            </div>
+
+
+                            <p>Thank you for participating in our training evaluation survey.</p>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

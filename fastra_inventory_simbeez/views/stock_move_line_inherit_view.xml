@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inherit_move_line_tree" model="ir.ui.view">
+        <field name="name">inherit.stock.move.line.tree</field>
+        <field name="model">stock.move.line</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="state == 'cancel'" decoration-danger="(state not in ('cancel','done'))" string="Move Lines" create="0" default_order="date">
+                <field name="date"/>
+                <field name="product_id" string="Product"/>
+                <field name="location_id"/>
+                <field name="location_dest_id"/>
+                <field name="unit_price" invisible="1"/>
+                <field name="qty_done" string="Quantity in Stock"/>
+                <field name="product_uom_id" options="{'no_open': True, 'no_create': True}" string="Unit of Measure" groups="uom.group_uom"/>
+                <field name="inventory_value" invisible="1"/>
+                <field name="state" invisible="1"/>
+                <field name="quantity_available"/>
+                <field name="quantity_ordered"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="inherit_stock_move_line_view_search" model="ir.ui.view">
+        <field name="name">inherit.stock.move.line.search</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.stock_move_line_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='groupby_product_id']" position="after">
+                <filter string="Location" name="groupby_location_id" domain="[]" context="{'group_by': 'location_dest_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="inherit_stock_move_line_action" model="ir.actions.act_window">
+            <field name="name">Product Inventory Report</field>
+            <field name="res_model">stock.move.line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_done': 1, 'search_default_groupby_product_id': 1, 'search_default_groupby_location_id': 1}</field>
+            <field name="view_id" ref="view_inherit_move_line_tree"/>
+    </record>
+
+    <menuitem
+        action="inherit_stock_move_line_action"
+        id="inherit_stock_move_line_menu"
+        parent="stock.menu_warehouse_report" sequence="150"/>
+</odoo>

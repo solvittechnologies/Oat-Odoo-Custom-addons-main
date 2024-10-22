@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_confirmation_evaluation_reject_form" model="ir.ui.view">
+            <field name="name">confirmation.evaluation.reject.form</field>
+            <field name="model">confirmation.evaluation.reject</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="note"/>
+                    </group>
+                    <footer>
+                        <button string='Reject' name="reject" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_confirmation_evaluation_reject" model="ir.actions.act_window">
+            <field name="name">Reject Confirmation</field>
+            <field name="res_model">confirmation.evaluation.reject</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_confirmation_evaluation_reject_form"/>
+           <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

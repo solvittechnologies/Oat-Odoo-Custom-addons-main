@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="report_overtime_guide"
+                model="overtime.guide"
+                string="Overtime Guide Report"
+                name="fastra_hr_customize.report_overtime_guide_pdf"
+                file="fastra_hr_customize.report_overtime_guide_pdf"
+                report_type="qweb-pdf"
+        />
+
+        <template id="report_overtime_guide_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <center>
+                                <h2>Overtime Guide Report</h2>
+                            </center>
+                            <div class="row mt32 mb32" name="info">
+                                <div t-if="doc.company_id" class="col-auto mw-100 mb-2">
+                                    <strong>Company:</strong>
+                                    <p class="m-0" t-field="doc.company_id.name"/>
+                                </div>
+                                <div t-if="doc.week" class="col-auto mw-100 mb-2">
+                                    <strong>Week:</strong>
+                                    <p class="m-0" t-field="doc.week"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Date From:</strong>
+                                    <span class="m-0" t-field='doc.date_from'/>
+                                    -
+                                    <span class="m-0" t-field='doc.date_to'/>
+                                </div>
+                                <div t-if="doc.location_id" class="col-auto mw-100 mb-2">
+                                    <strong>Location:</strong>
+                                    <p class="m-0" t-field="doc.location_id.name"/>
+                                </div>
+                            </div>
+                            <table style="width:100%" class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Day</th>
+                                    <th>Remarks</th>
+                                    <th>Amount</th>
+                                </tr>
+                                <t t-foreach="doc.overtime_guide_line_ids" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <t t-if="line.name">
+                                                <t t-esc="line.name.name"/>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.designation"/>
+                                        </td>
+                                        <td>
+                                           <t t-esc="line.day"/>
+                                        </td>
+                                        <td>
+                                             <t t-esc="line.remarks"/>
+                                        </td>
+                                        <td>
+                                             <t t-esc="line.amount"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

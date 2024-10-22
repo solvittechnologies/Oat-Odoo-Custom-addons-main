@@ -1,0 +1,8 @@
+<odoo>
+
+	<menuitem
+		name="Reports"
+		id="hyd_hr_compare_payroll.menu_hr_payroll_root_report"
+		parent="hr_payroll.menu_hr_payroll_root"/> 
+
+</odoo>

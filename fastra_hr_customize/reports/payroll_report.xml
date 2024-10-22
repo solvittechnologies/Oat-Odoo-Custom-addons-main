@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_payroll_landscape" model="report.paperformat">
+            <field name="name">A4</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">28</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+                id="report_hr_payroll_sheet"
+                model="hr.payslip.custom"
+                string="Payroll Sheet"
+                name="fastra_hr_customize.report_hr_payroll_sheet_pdf"
+                file="fastra_hr_customize.report_hr_payroll_sheet_pdf"
+                report_type="qweb-pdf"
+                paperformat="paperformat_payroll_landscape"
+		/>
+
+        <template id="report_hr_payroll_sheet_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+							<center><h2>Payroll Report</h2></center>
+                            <div class="row mt32 mb32" name="info">
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Period:</strong>
+                                    <span class="m-0" t-field='doc.date_from'/> - <span class="m-0" t-field='doc.date_to'/>
+                                </div>
+                                <div t-if="doc.month" class="col-auto mw-100 mb-2">
+                                    <strong>Month:</strong>
+                                    <p class="m-0" t-field="doc.month"/>
+                                </div>
+                                <div t-if="doc.employee_tag" class="col-auto mw-100 mb-2">
+                                    <strong>Employee Tag:</strong>
+                                    <p class="m-0" t-field="doc.employee_tag"/>
+                                </div>
+                                <div t-if="doc.location_id" class="col-auto mw-100 mb-2">
+                                    <strong>Location:</strong>
+                                    <p class="m-0" t-field="doc.location_id.name"/>
+                                </div>
+                                <div t-if="doc.account_analytic_id" class="col-auto mw-100 mb-2">
+                                    <strong>Project:</strong>
+                                    <p class="m-0" t-field="doc.account_analytic_id.name"/>
+                                </div>
+                            </div>
+                            <table style="width:100%" class="table table-sm">
+                                <tr>
+                                    <th>Staff ID</th>
+                                    <th>Mode of Payment</th>
+                                    <th>Place of Designation</th>
+                                    <th>Names of Employees</th>
+                                    <th>Function</th>
+                                    <th>Position</th>
+                                    <th>Basic Salary</th>
+                                    <th>Transport Allowance</th>
+                                    <th>Utilities Allowance</th>
+                                    <th>House Rent Allowance</th>
+                                    <th>Employee Benefit/Gratuity/Loan</th>
+                                    <th>OVERTIME/ODP</th>
+                                    <th>Monthly Gross Pay</th>
+                                    <th>Total Monthly Gross Pay</th>
+                                    <th>PAYE</th>
+                                    <th>ADVANCE SALARY</th>
+                                    <th>NHF</th>
+                                    <th>PENSION</th>
+                                    <th>LOAN REPAYMENT</th>
+                                    <th>ABSENT/ODP/PENALTY</th>
+                                    <th>TOTAL DEDUCTIONS</th>
+                                    <th>NET PAY</th>
+                                </tr>
+                                <t t-foreach="doc.payslip_custom_line_ids" t-as="line">
+                                    <tr>
+                                        <td><t t-if="line.staff_id" t-esc="line.staff_id.name"/></td>
+                                        <td><t t-esc="line.payment_mode"/></td>
+                                        <td><t t-if="line.designation_place" t-esc="line.designation_place.name"/></td>
+                                        <td><t t-if="line.employe_name" t-esc="line.employe_name.name"/></td>
+                                        <td><t t-if="line.function" t-esc="line.function.name"/></td>
+                                        <td><t t-esc="line.position"/></td>
+                                        <td><t t-esc="round(float(line.basic_salary),2)"/></td>
+                                        <td><t t-esc="round(float(line.transport_allowance),2)"/></td>
+                                        <td><t t-esc="round(float(line.utilities_allowance),2)"/></td>
+                                        <td><t t-esc="round(float(line.house_Rent_Allowance),2)"/></td>
+                                        <td><t t-esc="round(float(line.employee_benefit_gratuity_loan),2)"/></td>
+                                        <td><t t-esc="round(float(line.overtime_odp),2)"/></td>
+                                        <td><t t-esc="round(float(line.monthly_gross_pay),2)"/></td>
+                                        <td><t t-esc="round(float(line.total_monthly_gross_pay),2)"/></td>
+                                        <td><t t-esc="round(float(line.paye),2)"/></td>
+                                        <td><t t-esc="round(float(line.advance_salary),2)"/></td>
+                                        <td><t t-esc="round(float(line.nhf),2)"/></td>
+                                        <td><t t-esc="round(float(line.pension),2)"/></td>
+                                        <td><t t-esc="round(float(line.loan_repayment),2)"/></td>
+                                        <td><t t-esc="round(float(line.absent_odp_penalty),2)"/></td>
+                                        <td><t t-esc="round(float(line.total_deductions),2)"/></td>
+                                        <td><t t-esc="round(float(line.net_pay),2)"/></td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    <!--    <report id="report_hr_payroll_line_sheet" model="hr.payslip.custom.line" string="Payroll Sheet"
+                name="fastra_hr_customize.report_hr_payroll_line_sheet_pdf"
+                file="fastra_hr_customize.report_hr_payroll_line_sheet_pdf" report_type="qweb-pdf"/>
+        <template id="report_hr_payroll_line_sheet_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h3>Pay Slip</h3>
+                            <p>
+                                Salary Slip of
+                                <span t-if="doc.staff_id" t-field="doc.staff_id.name"/>
+                                for
+                                <span t-field="doc.payslip_custom_id.month"/>
+                                -
+                                <span t-field="doc.payslip_custom_id.date_from" t-options="{'format': 'yyyy'}"/>
+                            </p>
+                            <table class="table table-bordered mb32" style="table-layout:auto">
+                                <tr>
+                                    <td>Name</td>
+                                    <td>
+                                        <span t-if="doc.staff_id" t-field="doc.staff_id.name"/>
+                                    </td>
+                                    <td>Designation</td>
+                                    <td>
+                                        <t t-if="doc.staff_id and doc.staff_id.job_id">
+                                            <span t-field="doc.staff_id.job_id.name"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td colspan="3">
+                                        <t t-if="doc.staff_id and doc.staff_id.address_id">
+                                            <t t-if="doc.staff_id.address_id.street">
+                                                <span t-field="doc.staff_id.address_id.street"/>
+                                                ,
+                                                <span t-field="doc.staff_id.address_id.street2"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-field="doc.staff_id.address_id.street"/>
+                                            </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>
+                                        <t t-if="doc.staff_id">
+                                            <span t-field="doc.staff_id.work_email"/>
+                                        </t>
+                                    </td>
+                                    <td>Identification No</td>
+                                    <td>
+                                        <t t-if="doc.staff_id">
+                                            <span t-field="doc.staff_id.identification_id"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Reference</td>
+                                    <td colspan="3">
+                                        <span t-field="doc.payslip_custom_id.employee_tag"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Date From</td>
+                                    <td>
+                                        <span t-field="doc.payslip_custom_id.date_from"/>
+                                    </td>
+                                    <td>Date To</td>
+                                    <td>
+                                        <span t-field="doc.payslip_custom_id.date_to"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table" style="table-layout:auto">
+                                <th>
+                                    <td>Pay Items</td>
+                                    <td>Amount</td>
+                                </th>
+                                <tr>
+                                    <td><b>Wages and Salaries</b></td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td>Basic Salary</td>
+                                    <td><t t-esc="doc.basic_salary"/></td>
+                                </tr>
+                                <th>
+                                    <td>Gross</td>
+                                    <td><t t-esc="doc.basic_salary"/></td>
+                                </th>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+-->
+    </data>
+</odoo>

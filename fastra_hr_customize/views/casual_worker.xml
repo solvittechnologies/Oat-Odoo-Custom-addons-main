@@ -1,0 +1,11 @@
+<odoo>
+        <data>
+            <!--<menuitem name="Casual Worker" id="menu_casual_worker"
+                      parent="hr.menu_hr_root" action="hr.open_view_employee_list_my" sequence="3"/>-->
+
+
+            <record id="account.menu_finance_payables" model="ir.ui.menu">
+                <field name="groups_id" eval="[(4,ref('fastra_hr_customize.group_accounting_officer'))]"/>
+            </record>
+        </data>
+</odoo>

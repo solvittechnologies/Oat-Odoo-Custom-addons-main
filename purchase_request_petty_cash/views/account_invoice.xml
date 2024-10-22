@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_invoice_supplier_tree_inherit_total" model="ir.ui.view">
+            <field name="name">view.invoice.supplier.tree.inherit.total</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+            <field name="arch" type="xml">
+                <field name="amount_total_signed" position="replace">
+                    <field name="amount_total" string="Total" sum="Total"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_invoice_bill_form_inherit_delivery" model="ir.ui.view">
+            <field name="name">view.account.invoice.bill.form.inherit.delivery</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <!--<xpath expr="//field[@name='amount_tax']" position="after">
+                    <field name="delivery_cost"/>
+                </xpath>-->
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='discount']" position="after">
+                    <field name="discount_type"/>
+                    <field name="discount_rate" attrs="{'invisible':[('discount_type', '=', 'amount')]}"/>
+                    <field name="discount_fixed" attrs="{'invisible':[('discount_type', '=', 'percentage')]}"/>
+                    <field name="delivery_cost"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_invoice_form_inherit_delivery" model="ir.ui.view">
+            <field name="name">view.account.invoice.form.inherit.delivery</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='discount']" position="after">
+                    <field name="discount_type"/>
+                    <field name="discount_rate" attrs="{'invisible':[('discount_type', '=', 'amount')]}"/>
+                    <field name="discount_fixed" attrs="{'invisible':[('discount_type', '=', 'percentage')]}"/>
+                </xpath>
+                <xpath expr="//group[@class='oe_subtotal_footer oe_right']/field[@name='amount_total']"
+                       position="after">
+                    <field name="amount_total_words"/>
+                </xpath>
+            </field>
+        </record>
+
+        <template id="address_layout_inherit_change_side" inherit_id="web.address_layout">
+            <xpath expr="//t[@t-set='colclass']" position="attributes">
+                <attribute name="t-value">('col-md-5' if report_type == 'html' else 'col-3')</attribute>
+            </xpath>
+            <!--<xpath expr="//div[@name='address']" position="attributes">
+                <attribute name="t-att-class">colclass</attribute>
+            </xpath>-->
+        </template>
+
+        <template id="invoice_report_inherit_delivery" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@class='page']/h2" position="replace">
+                <h2 style="text-align:right;">
+                    <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">Invoice</span>
+                    <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Proforma Invoice</span>
+                    <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                    <span t-if="o.type == 'out_refund'">Credit Note</span>
+                    <span t-if="o.type == 'in_refund'">Vendor Credit Note</span>
+                    <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                    <span t-field="o.number"/>
+                </h2>
+            </xpath>
+            <xpath expr="//thead/tr/th[5]" position="after">
+                <th>Delivery</th>
+            </xpath>
+            <xpath expr="//tbody[@class='invoice_tbody']//tr//td[5]" position="after">
+                <td>
+                    <span t-field="line.delivery_cost"/>
+                </td>
+            </xpath>
+        </template>
+
+        <record model="ir.ui.menu" id="account.account_analytic_def_account">
+            <field name="name">Projects</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_overtime_guide_form" model="ir.ui.view">
+        <field name="name">view.overtime.guide.form</field>
+        <field name="model">overtime.guide</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Guide">
+                <header>
+                    <button name="generate_excel" type="object" string="Generate Excel" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="week"/>
+                             <label for="date_from" string="Date From"/>
+                            <div class="oe_inline">
+                                <field name="date_from" class="oe_inline"/>
+                                To
+                                <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="location_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                         <page string="Lines">
+                            <field name="overtime_guide_line_ids" nolabel="1">
+                                <tree string="Lines" editable="bottom">
+                                    <field name="name" domain="['|', ('active', '=', True), ('active', '=', False)]"/>
+                                    <field name="designation"/>
+                                    <field name="day"/>
+                                    <field name="remarks"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                         </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_overtime_guide_tree" model="ir.ui.view">
+        <field name="name">view.overtime.guide.tree</field>
+        <field name="model">overtime.guide</field>
+        <field name="arch" type="xml">
+            <tree string="Overtime Guide">
+                <field name="company_id"/>
+                <field name="week"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_overtime_guide_form" model="ir.actions.act_window">
+        <field name="name">Overtime Guide</field>
+        <field name="res_model">overtime.guide</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--<menuitem name="Overtime Guide"
+              id="overtime_guide_menu"
+              parent="fastra_hr_customize.hr_attendance_root"
+              action="action_overtime_guide_form"
+              sequence="30"/>-->
+</odoo>

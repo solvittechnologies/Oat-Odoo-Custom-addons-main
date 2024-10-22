@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_contract.hr_menu_contract" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+</odoo>

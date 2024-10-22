@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_training_feedback_form" model="ir.ui.view">
+        <field name="name">view.training.feedback.form</field>
+        <field name="model">training.feedback.form</field>
+        <field name="arch" type="xml">
+            <form string="TRAINING FEEDBACK FORM">
+                <header>
+                    <button name="generate_excel" type="object" string="Generate Excel" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="location"/>
+                        </group>
+                        <group>
+                            <field name="designation"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                    <span>1. </span>
+                    <label for="did_the_course_meet" /><br/>
+                    <field name="did_the_course_meet" widget="radio"/><br/>
+                    <br/>
+
+                    <span>2. </span>
+                    <label for="how_was_the_duration_of_the_course"/><br/>
+                    <field name="how_was_the_duration_of_the_course" widget="radio"/><br/>
+                    <br/>
+
+                    <span>3. </span>
+                    <label for="how_helpful_were_the_instructional_materials"/><br/>
+                    <field name="how_helpful_were_the_instructional_materials" widget="radio"/><br/>
+                    <br/>
+
+                    <span>4. </span>
+                    <label for="will_you_recommend_this_materials_to_others" /><br/>
+                    <field name="will_you_recommend_this_materials_to_others" widget="radio"/><br/>
+                    <br/>
+
+                    <span>5. </span>
+                    <label for="rate_the_overall_training"/><br/>
+                    <field name="rate_the_overall_training" widget="radio"/><br/>
+                    <br/>
+
+                    <span>6. </span>
+                    <label for="the_facilitators_oral_explanations_to_the_lecture_materials"/><br/>
+                    <field name="the_facilitators_oral_explanations_to_the_lecture_materials" widget="radio"/><br/>
+                    <br/>
+
+                    <span>7. </span>
+                    <label for="instructor_answer_questions_from_the_audience"/><br/>
+                    <field name="instructor_answer_questions_from_the_audience" widget="radio"/><br/>
+                    <br/>
+
+                    <span>8. </span>
+                    <label for="after_training_you_can_handle_the_assigned_task"/><br/>
+                    <field name="after_training_you_can_handle_the_assigned_task" widget="radio"/><br/>
+                    <br/>
+
+                    <field name="note" placeholder="Any other comments and suggestions"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_training_feedback_tree" model="ir.ui.view">
+        <field name="name">view.training.feedback.tree</field>
+        <field name="model">training.feedback.form</field>
+        <field name="arch" type="xml">
+            <tree string="TRAINING FEEDBACK FORM">
+                <field name="name"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_training_feedback_form" model="ir.actions.act_window">
+        <field name="name">TRAINING FEEDBACK FORM</field>
+        <field name="res_model">training.feedback.form</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--<menuitem name="Training Feedback Form"
+              id="training_feedback_form_menu"
+              parent="menu_training_plan_main"
+              action="action_training_feedback_form"
+              sequence="20"/>-->
+</odoo>

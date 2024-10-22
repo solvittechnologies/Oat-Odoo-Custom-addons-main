@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data> 
+    
+        <template id="assets_backend" name="fastra inventory simbeez Assets" inherit_id="web.assets_backend">
+        
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/fastra_inventory_sheadul/static/src/js/script.js"></script>
+            </xpath>
+
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/css" href="/fastra_inventory_sheadul/static/src/css/style.css"/>
+            </xpath>
+        </template>
+
+           <!-- <template id="assets_qweb" name="fastra inventory simbeez  QWeb Assets" inherit_id="web.assets_qweb">
+                <xpath expr="." position="inside">
+                    <t t-call-assets="fastra_inventory_sheadul.asset_schedule_template"/>
+                </xpath>
+            </template> -->
+
+    
+    </data>
+    
+
+ 
+</odoo>

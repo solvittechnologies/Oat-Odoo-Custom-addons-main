@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="line_hr_payslip_custom_account_line_btn" model="ir.ui.view">
+        <field name="name">hr.payslip.custom.account.line.report.btn</field>
+        <field name="model">hr.payslip.custom</field>
+        <field name="inherit_id" ref="fastra_hr_customize.view_hr_payslip_custom_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='payslip_custom_line_ids']/tree//field[@name='total']"
+                position="after">
+
+                <button string="Print" name="launch_wizard" type="object" class="oe_highlight" />
+            </xpath>
+
+            <!-- <xpath expr="//button[@name='generate_excel']" position="after">
+               
+                <button string="Print Payroll list" name="get_all_report" type="object" class="oe_highlight"/>
+            </xpath>
+            -->
+        </field>
+    </record>
+
+    <record id="ReportHRPayslipCustomLibeReport_wizard" model="ir.ui.view">
+        <field name="name">HR Payslip wizard</field>
+        <field name="model">report.fastra_payslip_print.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="HR Payslip wizard">
+                <group>
+                    <group>
+                        <field name="gross_pay" />
+                        <field name="tax" />
+                        <field name="net_pay" />
+                        <field name="total" />
+                    </group>
+                    <group>
+                        <field name="sucharge" />
+                        <field name="employee_pension" />
+                        <field name="incentive" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="get_report" string="Get Report" type="object" class="oe_highlight" />
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="sale_order_menu_in_invoice" model="ir.ui.menu">
+        <field name="name">Main Invoice</field>
+        <field name="sequence">0</field>
+        <field name="action" ref="sale.action_quotations_with_onboarding"/>
+        <field name="parent_id" ref="account.menu_finance_receivables"/>
+    </record>
+
+    <act_window id="action_ReportHRPayslipCustomLibeReport_wizard" name="HR Payslip Report" res_model="report.fastra_payslip_print.report.wizard" view_mode="form" target="new" />
+
+
+
+</odoo>

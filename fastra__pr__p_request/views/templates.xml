@@ -1,0 +1,133 @@
+<odoo>
+    <data>
+        <template id="report_saleorder_document_inherit_remove_number" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//t[@t-if='doc.subject']" position="replace"/>
+            <xpath expr="//p[@style='color:skyblue;']" position="replace">
+                <t t-if="doc.company_id and doc.company_id.name == 'Rosettee FZE'">
+                    <p style="color:black;"><t t-esc="doc.company_id.name"/><br/>
+                        a) Bank Name: Zenith Bank <br/>
+                        b) Account # : 1210108003 <br/>
+
+                    </p>
+                </t>
+                <t t-if="doc.company_id and doc.company_id.name == 'ROSETTEE ENTERPRISES LIMITED'">
+                    <p style="color:black;"><t t-esc="doc.company_id.name"/><br/>
+                        a) Bank Name: Zenith Bank <br/>
+                        b) Account #: 1013309386 <br/>
+                        c) Tin#: 02766396-0001 <br/>
+                    </p>
+                </t>
+            </xpath>
+
+                <xpath expr="//table[@class='table table-sm o_main_table']//tr" position="replace">
+                    <tr style="background-color:skyblue;borderTop:1px ridge black;">
+                    <td>Customer ID:</td>
+                    <td style="background-color:skyblue;"><span t-field="doc.partner_id.customer_unique_id"/></td>
+                </tr>
+                </xpath>
+
+            <xpath expr="//span[@t-field='doc.partner_id.name'] " position="after">
+                <t t-if="doc.partner_id.street"><span t-field="doc.partner_id.street"/>,<br/></t>
+                <t t-if="doc.partner_id.street2"><span t-field="doc.partner_id.street2"/>,<br/></t>
+                <t t-if="doc.partner_id.city"><span  t-field="doc.partner_id.city"/>,<br/></t>
+                <t  t-if="doc.partner_id.state_id"><span t-field="doc.partner_id.state_id.name"/>,</t>
+                <t t-if="doc.partner_id.zip"><span  t-field="doc.partner_id.zip"/>,<br/></t>
+                <t t-if="doc.partner_id.country_id" ><span t-field="doc.partner_id.country_id.name"/></t>
+            </xpath>
+
+            <xpath expr="//div[@class='col-8']//strong" position="replace"> </xpath>
+
+
+            <xpath expr="//table[@class='table table-sm o_main_table']//tr[last()]" position="after">
+                <tr style="background-color:skyblue;border:1px solid black;">
+                    <td style="background-color:skyblue;color:black;border: 1px ridge black;">Tin No</td>
+                    <td style="background-color:skyblue;color:black;border: 1px ridge black;"><t t-esc="doc.company_id.tin_number"/></td>
+			    </tr>
+            </xpath>
+            <xpath expr="//div[@class='col-8']/h5" position="replace"> </xpath>
+            <xpath expr="//div[@class='col-8']/strong" position="replace"> </xpath>
+
+            <xpath expr="//div[@class='page']/h1/t" position="replace">
+                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                    <span t-if="doc.state in ['sale','done','cancel']">Pro-forma  Invoice #<span t-field="doc.name"/></span>
+                    <span t-if="doc.state not in ['sale','done','cancel']">Pro-forma  Invoice #<span t-field="doc.name"/></span>
+                </t>
+            </xpath>
+            <!-- Hide Terms And condition from main invoice-->
+            <xpath expr="/t[1]/t[1]/div[1]/div[6]" position="replace"><div> </div></xpath>
+            <!-- Hide sales Representative from main invoice-->
+            <xpath expr="//strong[@class='text-center']/span[@t-field='doc.user_id.name']" position="replace"> </xpath>
+        </template>
+
+        <template id="report_invoice_document_inherit_company_details" inherit_id="account.report_invoice_document">
+            <xpath expr="//p[@name='comment']" position="before">
+                <t t-if="o.company_id and o.company_id.name == 'Rosettee FZE'">
+                    <p style="color:black;"><t t-esc="o.company_id.name"/><br/>
+                        a) Bank Name: Zenith Bank <br/>
+                        b) Account # : 1210108003 <br/>
+
+                    </p>
+                </t>
+                <t t-if="o.company_id and o.company_id.name == 'ROSETTEE ENTERPRISES LIMITED'">
+                    <p style="color:black;"><t t-esc="o.company_id.name"/><br/>
+                        a) Bank Name: Zenith Bank <br/>
+                        b) Account #: 1013309386 <br/>
+                        c) Tin#: 02766396-0001 <br/>
+
+                    </p>
+                </t>
+            </xpath>
+
+<!--            <xpath expr="//t[@t-set='address']" position="replace">-->
+<!--                <t t-set="address">-->
+<!--                     Name: <span t-field="o.partner_id.name"/>-->
+<!--                </t>-->
+<!--            </xpath>-->
+        </template>
+
+        <!--Footer Template inherit -->
+
+        <template id="report_account_invoice_vendor_footer" inherit_id="web.external_layout_boxed">
+            <xpath expr="//div[@class='footer o_boxed_footer']" position="replace">
+                <div class="footer o_boxed_footer">
+                    <div class="text-center">
+                        <ul class="list-inline">
+                            <li><t t-if="company and company.name == 'ROSETTEE ENTERPRISES LIMITED'">
+                                <t t-if="company.kano_address"><span><b>Kano Address: </b><t t-esc="company.kano_address"/></span></t>,
+                                <t t-if="company.lagos_address"><span><b>Lagos Address: </b><t t-esc="company.lagos_address"/></span></t>,</t>
+
+                                <t t-if="company and company.name == 'Rosettee FZE'"><span><b>Address</b></span></t>
+
+                                <t t-if="company.street"><span t-field="company.street"/>,</t>
+                                <t t-if="company.street2"><span t-field="company.street2"/>,</t>
+                                <t t-if="company.city"><span t-field="company.city"/>,</t>
+                                <t t-if="company.state_id"><span  t-field="company.state_id.name"/>,</t>
+                                <t t-if="company.zip"><span t-field="company.zip"/>,</t>
+                                <t t-if="company.country_id"><span t-field="company.country_id.name"/></t>
+                            </li>
+
+                            <li t-if="company.phone"><b>Tel: </b><span t-field="company.phone"/></li>
+                            <li t-if="company.email"><b>Mail: </b><span t-field="company.email"/></li>
+                            <li t-if="company.website"><b>Web: </b><span t-field="company.website"/></li>
+                            <li t-if="company.vat"><t t-esc="(company.country_id.vat_label or 'Tax ID').replace(' ','\N{NO-BREAK SPACE}')"/>: <span t-esc="company.vat.replace(' ','\N{NO-BREAK SPACE}')"/></li>
+                        </ul>
+                        <div t-field="company.report_footer"/>
+                        <div t-if="report_type == 'pdf'">
+                            Page: <span class="page"/> / <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+
+            </xpath>
+        </template>
+
+        <!--Header Template inherit -->
+        <template id="report_account_invoice_vendor_header" inherit_id="web.external_layout_boxed">
+            <xpath expr="//div[@name='company_address']" position="replace">
+                <div name="company_address" class="mb4">
+                    <span t-field="company.report_header_info"/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

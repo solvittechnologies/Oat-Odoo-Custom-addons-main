@@ -1,0 +1,15 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+,,,,,,,
+acces_profil_utilisateur,profil_r utilisateur,model_hyd_hr_security_profil,base.group_user,1,0,0,0
+acces_profil_utilisateur_rh,profil_rwcd utilisateur rh,model_hyd_hr_security_profil,hr.group_hr_user,1,0,0,0
+acces_profil_erp_manager,profil_rwcd erp_manager,model_hyd_hr_security_profil,base.group_erp_manager,1,1,1,1
+acces_profil_manager_rh,profil_rwcd manager rh,model_hyd_hr_security_profil,hr.group_hr_manager,1,1,1,1
+acces_profil_default,profil default,model_hyd_hr_security_profil,,0,0,0,0
+,,,,,,,
+acces_role_utilisateur,role_r utilisateur,base_user_role.model_res_users_role,base.group_user,1,0,0,0
+acces_role_utilisateur_rh,role_r utilisateur rh,base_user_role.model_res_users_role,hr.group_hr_user,1,0,0,0
+acces_role_manager_rh,role_r manager rh,base_user_role.model_res_users_role,hr.group_hr_manager,1,0,0,0
+,,,,,,,
+acces_role_line_utilisateur,role_line_r utilisateur,base_user_role.model_res_users_role_line,base.group_user,1,0,0,0
+acces_role_line_utilisateur_rh,role_line_r utilisateur rh,base_user_role.model_res_users_role_line,hr.group_hr_user,1,0,0,0
+acces_role_line_manager_rh,role_line_r manager rh,base_user_role.model_res_users_role_line,hr.group_hr_manager,1,0,0,0

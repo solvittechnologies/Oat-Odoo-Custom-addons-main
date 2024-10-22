@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="exit_development_experience_form_view" model="ir.ui.view">
+            <field name="name">exit.development.experience.form.view</field>
+            <field name="model">exit.development.experience</field>
+            <field name="arch" type="xml">
+                <form string="Exit Development Experience Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="exit_development_experience_tree_view" model="ir.ui.view">
+            <field name="name">exit.development.experience.tree.view</field>
+            <field name="model">exit.development.experience</field>
+            <field name="arch" type="xml">
+                <tree string="Exit Development Experience Tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="exit_development_experience_act_window" model="ir.actions.act_window">
+            <field name="name">Exit Interview Development Experience</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exit.development.experience</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Exit Interview Development Experience" id="exit_development_experience_menu" sequence="20"
+                  parent="fastra_hr_customize.hr_master_menu_root" action="exit_development_experience_act_window"/>
+
+    </data>
+</odoo>

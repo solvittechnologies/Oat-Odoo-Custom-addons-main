@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_material_consumption_line_tree" model="ir.ui.view">
+            <field name="name">view.material.consumption.line.tree</field>
+            <field name="model">stock.inventory.line</field>
+            <field name="arch" type="xml">
+                <tree string="Inventory Details" edit="0" create="0">
+                    <field name="date"/>
+                    <field name="product_id"/>
+                    <field name="description"/>
+                    <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                    <field name="unit_price"/>
+                    <field name="qty_to_consume" string="Qty consume"/>
+                    <field name="qty_stock"/>
+                    <field name="qty_available"/>
+                    <field name="inventory_valuation"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_material_consumption_line_search" model="ir.ui.view">
+            <field name="name">view.material.consumption.line.search</field>
+            <field name="model">stock.inventory.line</field>
+            <field name="arch" type="xml">
+                <search string="Material Consumption Line">
+                    <group expand="0" string="Group By">
+                        <filter string="Product" name="groupby_product" domain="" context="{'group_by':'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_material_consumption_line_view" model="ir.actions.act_window">
+            <field name="name">Material Consumption Line</field>
+            <field name="res_model">stock.inventory.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_material_consumption_line_tree"/>
+            <field name="search_view_id" ref="view_material_consumption_line_search"/>
+            <field name="context">{'search_default_groupby_product': 1}</field>
+        </record>
+
+        <record id="stock_location_form_inherit_inventory_value" model="ir.ui.view">
+            <field name="name">stock.location.form.inherit.inventory.value</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button string="Inventory Valuation"
+                            class="oe_stat_button"
+                            icon="fa-building-o"
+                            name="open_inventory_value"
+                            type="object"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

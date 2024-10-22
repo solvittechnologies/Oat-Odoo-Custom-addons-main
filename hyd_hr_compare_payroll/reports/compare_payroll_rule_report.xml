@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report 
+        id="compare_payroll_rule_report"
+        model="hyd_hr_compare_payroll.compare_payroll_rule_wiz"
+        string="Comparative table of payroll"
+        report_type="qweb-pdf"
+        name="hyd_hr_compare_payroll.compare_payroll_rule_template" 
+        file="cOMPARATIVE TABLE PAYROLL"/>
+
+    <template id="compare_payroll_rule_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    
+                    <style type="text/css">
+                    thead {
+                        display: table-header-group
+                    }
+                    
+                    tfoot {
+                        display: table-row-group
+                    }
+                    
+                    tr {
+                        page-break-inside: avoid
+                    }
+                    </style>
+                    <br/><br/>
+                    <table style="width: 100%;border: 2px solid black;border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <td align="center" colspan="4">
+                                    <h4 align="center" style="font-style: bold; color:black;"><u>COMPARATIVE TABLE OF SALARY RULE</u></h4>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr type="champs">
+                                <th style="padding:4px; border-top: 1px solid black;border-right: 1px solid black;" align="left" >Rules</th>
+                                <th style="padding:4px; border-top: 1px solid black;border-right: 1px solid black; font-size: small;" align="center" ><span t-esc="data.get('date_start1')" t-options="{'widget': 'date'}"/> - <span t-esc="data.get('date_end1')" t-options="{'widget': 'date'}"/> </th>
+                                <th style="padding:4px; border-top: 1px solid black;border-right: 1px solid black; font-size: small;" align="center" ><b><span t-esc="data.get('date_start2')" t-options="{'widget': 'date'}"/> - <span t-esc="data.get('date_end2')" t-options="{'widget': 'date'}"/></b></th>
+                                <th style="padding:4px; border-top: 1px solid black;" align="center">Variation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="data['regles_valeurs']" t-as="regle">
+                                <td style="padding:4px; border-top: 1px solid black;border-right: 1px solid black;" align="left"><span t-esc="regle[0]" /></td>
+                                <td style="padding:4px; border-top: 1px solid black;border-right: 1px solid black;" align="right"><span t-esc="regle[1]" /></td>
+                                <td align="right" style="padding:4px; border-top: 1px solid black;border-right: 1px solid black;"><span t-esc="regle[2]" /></td>
+                                <td style="padding:4px; border-top: 1px solid black;" align="right"><span t-esc="regle[3]" /></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td style="padding:4px; border-top: 1px solid black;border-right: 1px solid black;" align="left"><b>Total</b></td>
+                                <td style="padding:4px; border-top: 1px solid black;border-right: 1px solid black;" align="right"><span t-esc="data['total_1']" /></td>
+                                <td style="padding:4px; border-top: 1px solid black;border-right: 1px solid black;" align="right"><span t-esc="data['total_2']" /></td>
+                                <td style="padding:4px; border-top: 1px solid black;" align="right"><span t-esc="data['total_diff']" /></td>
+                            </tr>
+                       </tfoot> 
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

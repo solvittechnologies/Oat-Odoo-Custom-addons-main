@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<template id="asset_schedule_template" xml:space="preserve">
+    <t t-name="fastra_inventory_sheadul.assetSchedule">
+        <div class="oh_dashboards m-3">
+            <div class="container-fluid o_pj_dashboard m-0 p-0">
+            </div>
+        </div>
+    </t>
+    <t t-name="fastra_inventory_sheadul.assetSchedulereport">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">S/N</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Opening Qty.</th>
+
+                    <th scope="col">Qty .IN</th>
+                    <th scope="col">Qty Out</th>
+                    <th scope="col">Closing Qty.</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>List of Equipments</td>
+                    <td></td>
+                    <td></td>
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <t t-foreach="widget.data" t-as="i">
+                    <tr>
+                        <th scope="row"><t t-esc="i['id']"/></th>
+                        <td><t t-esc="i['description']"/></td>
+                        <td><t t-esc="i['code']"/></td>
+                        <td><t t-esc="i['opening_qty']"/></td>
+
+                        <td><t t-esc="i['qty_in']"/></td>
+                        <td><t t-esc="i['qty_out']"/></td>
+                        <td><t t-esc="i['closing_qty']"/></td>
+                        <td><t t-esc="i['status']"/></td>
+                        <td><t t-esc="i['remarck']"/></td>
+                    </tr>
+                </t>
+
+
+            </tbody>
+        </table>
+    </t>
+</template>
+
+<!-- <template id="asset_schedulereport_template"> 
+        <t t-name="fastra_inventory_sheadulassetSchedulereport">
+            <p>ok</p>
+        </t>
+    </template> -->

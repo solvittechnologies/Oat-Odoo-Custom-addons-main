@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report 
+        id="compare_payslip_employee_report"
+        model="hyd_hr_compare_payroll.compare_payslip_employee_wiz"
+        string="Compare payslip by employee"
+        report_type="qweb-pdf"
+        name="hyd_hr_compare_payroll.compare_payslip_employee_template" 
+        file="Tableau comparatif"/>
+
+    <template id="compare_payslip_employee_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                
+                <div class="page">
+
+                     <style type="text/css">
+                       
+                        table {
+                          border-collapse: collapse;
+                        }
+                        th,td {
+                          border: 1px solid #cecfd5;
+                          padding: 10px 15px;
+                        }
+
+                        .alnright { text-align: right; }
+
+                    </style>
+                    
+                    <h3 align="center"><b>COMPARATIVE TABLE OF SALARY RULE BY EMPLOYEE</b></h3>
+
+                    <br/><br/>
+
+
+                    <t t-foreach="data['regles_valeurs']" t-as="ligne">
+                        <table t-if="len(ligne[1].get('colonnes')) &gt; 0" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <td colspan="5" align="center">
+                                        <h4>Employee: <b><span t-esc="ligne[0]"/></b></h4>
+                                    </td>
+                                </tr>
+                                <tr type="champs">
+                                    <th align="center" style="text-align:center"><b>Salary rule</b></th>
+                                    <th align="center" style="font-size: small;"><b><span t-esc="data.get('date_start1')" t-options="{'widget': 'date'}"/> - <span t-esc="data.get('date_end1')" t-options="{'widget': 'date'}"/> </b></th>
+                                    <th align="center" style="font-size: small;"><b><span t-esc="data.get('date_start2')" t-options="{'widget': 'date'}"/> - <span t-esc="data.get('date_end2')" t-options="{'widget': 'date'}"/></b></th>
+                                    <th align="center"><b>Status</b></th>
+                                    <th align="center"><b>Variation</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr t-foreach="ligne[1].get('colonnes')" t-as="regle">
+                                        <td align="center"><span t-esc="regle.get('champ')"/></td>
+                                        <td class="alnright"><span t-esc="regle.get('val1')"/></td>
+                                        <td class="alnright"><span t-esc="regle.get('val2')"/></td>
+                                        <td align="center"><span t-esc="regle.get('status')"/></td>
+                                        <td class="alnright"><span t-esc="regle.get('variation')"/></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </t>
+
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <h3 style="color:black;"><b>TOTAL</b></h3>
+                                </td>
+                            </tr>
+                            <tr type="champs">
+                                <th align="center" style="text-align:center"><b>Salary rule</b></th>
+                                <th align="center"><b>Sum variation</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr t-foreach="data['total']" t-as="regle">
+                                    <td align="center"><span t-esc="regle[0]"/></td>
+                                    <td class="alnright"><span t-esc="regle[1]"/></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </t>
+        </t>
+    </template>
+
+</odoo>

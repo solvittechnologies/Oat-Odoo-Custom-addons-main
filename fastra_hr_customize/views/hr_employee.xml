@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_employee_form_inherit_loan" model="ir.ui.view">
+            <field name="name">view.employee.form.inherit.loan</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="work_phone" position="after">
+                    <field name="gross_monthly_pay"/>
+                    <field name="employee_unique_code" invisible="1"/>
+                </field>
+                <xpath expr="//field[@name='tz']" position="after">
+                    <field name="account_details"/>
+                    <field name="birth_date"/>
+                    <field name="date_of_employment"/>
+                </xpath>
+
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page name="big_data" string="Big Data">
+                        <group>
+                            <field name="full_name" placeholder="First name - Middle name - Surname"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="gender"/>
+                                <field name="date_of_birth"/>
+                                <field name="nationality"/>
+                            </group>
+                            <group>
+                                <field name="maiden_name"/>
+                                <field name="place_of_birth"/>
+                                <field name="state_of_origin"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="local_goverment"/>
+                            <field name="residential_address"/>
+                            <field name="permanent_home_address"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="telephone_number"/>
+                            </group>
+                            <group>
+                                <field name="telephone_alternative"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="email"/>
+                        </group>
+                        <div>
+                            <label for="employee_institute_ids" string="INSTITUTION (S) ATTENDED WITH DATE"/>
+                            <field name="employee_institute_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </div>
+                        <div>
+                            <label for="employee_education_ids" string="EDUCATIONAL QUALIFICATION OBTAINED"/>
+                            <field name="employee_education_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="marital_status"/>
+                            </group>
+                            <group>
+                                <field name="name_of_spouse"/>
+                            </group>
+                        </group>
+                        <div>
+                            <label for="employee_child_ids" string="CHILD INFORMATION"/>
+                            <field name="employee_child_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="gender"/>
+                                    <field name="date_of_birth"/>
+                                </tree>
+                            </field>
+                        </div>
+                        <div>
+                            <label for="employee_kin_ids" string="NEXT OF KIN"/>
+                            <field name="employee_kin_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="relationship"/>
+                                    <field name="address"/>
+                                    <field name="split_benefit"/>
+                                </tree>
+                            </field>
+                        </div>
+                        <div>
+                            <label for="employee_previous_ids" string="LAST 3 PREVIOUS EMPLOYMENTS:"/>
+                            <field name="employee_previous_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="company_name"/>
+                                    <field name="company_address"/>
+                                    <field name="designation_held"/>
+                                    <field name="from_date"/>
+                                    <field name="to_date"/>
+                                </tree>
+                            </field>
+                        </div>
+                        <div>
+                            <label for="employee_reference_ids" string="REFEREES:"/>
+                            <field name="employee_reference_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="address"/>
+                                    <field name="nearest_bus_stop"/>
+                                    <field name="telephone"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="signature"/>
+                            </group>
+                            <group>
+                                <field name="signature_date"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <!--<button name="toggle_active" position="before">
+                    <button class="oe_stat_button" type="object" name="get_leave_balance_view" icon="fa-calendar">
+                        <field string="Leave Balance" name="leave_balance" widget="statinfo"/>
+                    </button>
+                    <button class="oe_stat_button" type="object" name="get_absent_balance_view" icon="fa-calendar">
+                        <field string="Absent" name="absent_balance" widget="statinfo"/>
+                    </button>
+                </button>-->
+            </field>
+        </record>
+
+        <!--    Hide Button Box -->
+        <record id="view_employee_form_inherit_hr_attendance_inherit_hide" model="ir.ui.view">
+            <field name="name">view.employee.form.inherit.hr.attendance.inherit.hide</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_attendance.view_employee_form_inherit_hr_attendance"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(hr_attendance.hr_attendance_action_employee)d']" position="replace">
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_hr_employee_view_form2_inherit_hide" model="ir.ui.view">
+            <field name="name">hr.hr.employee.view.form2.inherit.hide</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(hr_contract.act_hr_employee_2_hr_contract)d']" position="replace">
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_employee_form_leave_inherit_hide" model="ir.ui.view">
+            <field name="name">view.employee.form.leave.inherit.hide</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_holidays.view_employee_form_leave_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(hr_holidays.act_hr_employee_holiday_request)d']" position="replace">
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_employee_view_form_inherit_timesheet_inherit_hide" model="ir.ui.view">
+            <field name="name">hr.employee.view.form.inherit.timesheet.inherit.hide</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_employee_view_form_inherit_timesheet"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(hr_timesheet.timesheet_action_from_employee)d']" position="replace">
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

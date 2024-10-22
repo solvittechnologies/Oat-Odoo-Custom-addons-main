@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_cost_code_dictionary_tree" model="ir.ui.view">
+            <field name="name">view.cost.code.dictionary.tree</field>
+            <field name="model">cost.code.dictionary</field>
+            <field name="arch" type="xml">
+                <tree string="Cost Code Dictionary" editable="top">
+                    <field name="prelims_category_id"/>
+                    <field name="project_element_category_id"/>
+                    <field name="subcategory_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_cost_code_dictionary_act_window" model="ir.actions.act_window">
+            <field name="name">Cost Code Dictionary</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cost.code.dictionary</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem name="Cost Code Dictionary"
+                  id="action_cost_code_dictionary_menu"
+                  parent="fastra_project_budget.master_data_menu_root"
+                  action="view_cost_code_dictionary_act_window"/>
+
+    </data>
+</odoo>

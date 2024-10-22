@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_skilled_workers_form" model="ir.ui.view">
+        <field name="name">view.skilled.workers.form</field>
+        <field name="model">skilled.workers</field>
+        <field name="arch" type="xml">
+            <form string="Skilled workers">
+                <header>
+                    <button name="generate_excel" type="object" string="Generate Excel" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="week"/>
+                            <label for="date_from" string="Date From"/>
+                            <div class="oe_inline">
+                                <field name="date_from" class="oe_inline"/>
+                                To
+                                <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="location_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                         <page string="STAFF">
+                            <field name="staff_line_ids" nolabel="1">
+                                <tree string="STAFF" editable="bottom">
+                                    <field name="staff_id" domain="['|', ('active', '=', True), ('active', '=', False)]"/>
+                                    <field name="worker_department_id"/>
+                                    <field name="saturday"/>
+                                    <field name="sunday"/>
+                                    <field name="monday"/>
+                                    <field name="tuesday"/>
+                                    <field name="wednesday"/>
+                                    <field name="thursday"/>
+                                    <field name="friday"/>
+                                    <field name="saturday_2"/>
+                                    <field name="comment"/>
+                                    <field name="total_days_present"/>
+                                    <field name="total_days_absent"/>
+                                </tree>
+                            </field>
+                         </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_skilled_workers_tree" model="ir.ui.view">
+        <field name="name">view.skilled.workers.tree</field>
+        <field name="model">skilled.workers</field>
+        <field name="arch" type="xml">
+            <tree string="Skilled workers">
+                <field name="company_id"/>
+                <field name="week"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="location_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_skilled_workers_form" model="ir.actions.act_window">
+        <field name="name">Skilled workers</field>
+        <field name="res_model">skilled.workers</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--<menuitem name="Attendance"
+              id="hr_attendance_root"
+              parent="hr_menus.hr_menus"
+              sequence="6"/>-->
+
+    <!--<menuitem name="Skilled workers"
+              id="skilled_workers_menu"
+              parent="hr_attendance_root"
+              action="action_skilled_workers_form"
+              sequence="10"/>-->
+</odoo>

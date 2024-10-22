@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_boq_lines_list" model="ir.ui.view">
+        <field name="name">view.boq.lines.list</field>
+        <field name="model">boq.lines</field>
+        <field name="arch" type="xml">
+            <tree string="BOQ" editable="bottom">
+                <field name="name"/>
+                <field name="quantity"/>
+                <field name="agreed_quantity"/>
+                <field name="unit"/>
+                <field name="rate"/>
+                <field name="amount"/>
+                <field name="amount_agreed_qty"/>
+                <field name="project"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_boq_lines_form" model="ir.actions.act_window">
+        <field name="name">BOQ Lines</field>
+        <field name="res_model">boq.lines</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem name="Master Data"
+                  id="master_data_menu_root"
+                  parent="fastra_project_budget.menu_action_project_budget_root"
+                  sequence="50"/>
+
+        <menuitem name="Cost of BOQ"
+                  id="cost_boq_menu"
+                  parent="master_data_menu_root"
+                  action="action_boq_lines_form"
+                  sequence="10"
+        />
+</odoo>

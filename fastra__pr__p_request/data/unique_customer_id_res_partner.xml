@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="seq_res_partner_customer_unique_id" model="ir.sequence">
+            <field name="name">Res Partner</field>
+            <field name="code">res.partner.unique.customer.id.seq</field>
+            <field name="prefix"></field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+	</data>
+</odoo>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="paperformat_hr_payslip_custom_report" model="report.paperformat">
+        <field name="name">HR Payslip Custom Report</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_right">7</field>
+        <field name="margin_left">7</field>
+        <field name="header_line" eval="True"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="hr_payslip_custom_report"
+            model="hr.payslip.custom.line"
+            string="Employee Payslip"
+            report_type="qweb-pdf"
+            name="fastra_payslip_print.hr_payslip_custom_report_view"
+            paperformat="fastra_payslip_print.paperformat_hr_payslip_custom_report"
+            menu="False"
+            print_report_name="'payslip report - %s' % object.employe_id.name"/>
+
+
+    <template id="hr_payslip_custom_report_view">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout_boxed">
+
+                <main>
+                    <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                    <div class="page">
+                        <div style="padding-top:40px">
+                            <h2>Pay Slip</h2>
+                            <p>Salary Slip of
+                                <span>
+                                    <t t-esc="docs.employee_id.name"/>
+                                </span>
+                            </p>
+                            <p>
+                                <t t-esc="company.name"/>
+                            </p>
+                        </div>
+                        <table class="table table-sm o_main_table">
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <t t-esc="docs.employee_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>
+                                    <t t-esc="docs.employee_id.work_location  "/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Month</th>
+                                <td>
+                                    <t t-esc="docs.payslip_custom_id.month"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>
+                                    <t t-esc="docs.employee_id.work_email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Period</th>
+                                <td>
+                                    <t t-esc="docs.payslip_custom_id.date_from"/>
+                                    <span>-</span>
+                                    <t t-esc="docs.payslip_custom_id.date_to"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <h2>Details by Salary Rule Category</h2>
+
+                        <table class="table table-sm o_main_table">
+                            <tr>
+                                <th>Code</th>
+                                <th>SALARY RULE CATEGORY</th>
+                                <th>TOTAL</th>
+                            </tr>
+                            <t t-if="getwizardValue.gross_pay">
+                                <tr>
+                                    <td>GP</td>
+                                    <td>Gross Pay</td>
+                                    <td>
+                                        <t t-esc="docs.gross_pay" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="getwizardValue.sucharge">
+
+                                <tr>
+                                    <td>SC</td>
+                                    <td>Surcharge</td>
+                                    <td>
+                                        <t t-esc="docs.sucharge" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+
+                            </t>
+
+                            <t t-if="getwizardValue.tax">
+                                <tr>
+                                    <td>TAX</td>
+                                    <td>Tax</td>
+                                    <td>
+                                        <t t-esc="docs.tax" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="getwizardValue.employee_pension">
+                                <tr>
+                                    <td>PENSION</td>
+                                    <td>Pension Employee</td>
+                                    <td>
+                                        <t t-esc="docs.employee_pension"
+                                           t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="getwizardValue.net_pay">
+                                <tr>
+                                    <td>NET</td>
+                                    <td>Net Pay</td>
+                                    <td>
+                                        <t t-esc="docs.net_pay"
+                                           t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="getwizardValue.incentive">
+                                <tr>
+                                    <td>INCTV</td>
+                                    <td>Incentive</td>
+                                    <td>
+                                        <t t-esc="docs.incentive"
+                                           t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="getwizardValue.total">
+                                <tr>
+                                    <td>TOTAL</td>
+                                    <td>Total</td>
+                                    <td>
+                                        <t t-esc="docs.total"
+                                           t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </main>
+
+
+                <!-- <t t-set="address">
+                    <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                    <div t-if="o.partner_id.vat" class="mt16">
+                        <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
+                        <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/></div>
+                </t> -->
+
+                <!-- <div class="page">
+                <div class="header">
+                    <h3 class="text-center">Sales Summary Report
+                        <span style="font-size: 14px;"><strong>From</strong></span>
+                    </h3>
+                    <h3 class="text-center">Sales Summary Report
+                        <span style="font-size: 14px;"><strong>From</strong></span>
+                    </h3>
+                </div>
+            </div> -->
+
+
+                <!-- <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page" />
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+            </t>
+
+        </t>
+
+    </template>
+
+
+</odoo>

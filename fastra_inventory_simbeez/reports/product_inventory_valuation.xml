@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report
+                id="report_product_inventory_valuation"
+                model="stock.move.line"
+                string="Product Inventory Valuation"
+                name="fastra_inventory_simbeez.report_product_inventory_valuation_pdf"
+                file="fastra_inventory_simbeez.report_product_inventory_valuation_pdf"
+                report_type="qweb-pdf"
+		/>
+
+        <template id="report_product_inventory_valuation_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+							<center><h2>Product Inventory Valuation Report</h2></center>
+
+                            <table style="border:1px solid black;" class="table table-sm">
+                                <tr style="background-color:skyblue;border:1px solid black;" >
+                                    <th style="border:1px solid black;">DATE</th>
+                                    <th style="border:1px solid black;">PRODUCT</th>
+                                    <th style="border:1px solid black;">FROM</th>
+                                    <th style="border:1px solid black;">TO</th>
+                                    <th style="border:1px solid black;">UNIT PRICE</th>
+                                    <th style="border:1px solid black;">QUANTITY IN STOCK</th>
+                                    <th style="border:1px solid black;">UNIT OF MEASURE</th>
+                                    <th style="border:1px solid black;">INVENTORY VALUE</th>
+                                    <th style="border:1px solid black;">QUANTITY AVAILABLE</th>
+                                    <th style="border:1px solid black;">QUANTITY ORDERED</th>
+                                </tr>
+                                <t t-foreach="doc" t-as="line">
+                                    <tr style="background-color:white;border:1px solid black;" >
+                                        <td ><t t-esc="line.date"/></td>
+                                        <td><t t-esc="line.product_id.name"/></td>
+                                        <td><t t-esc="line.location_id.name"/></td>
+                                        <td><t t-esc="line.location_dest_id.name or ''"/></td>
+                                        <td><t t-esc="line.unit_price"/></td>
+                                        <td><t t-esc="line.qty_done"/></td>
+                                        <td><t t-esc="line.product_uom_id.name"/></td>
+                                        <td><t t-esc="line.inventory_value"/></td>
+                                        <td><t t-esc="line.quantity_available"/></td>
+                                        <td style="background-color:white"><t t-esc="line.quantity_ordered"/></td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="stock_move_line_excel_confirm_view" model="ir.ui.view">
+            <field name="name">stock.move.line.excel.confirm.form</field>
+            <field name="model">stock.move.line.excel.report.confirm</field>
+            <field name="arch" type="xml">
+                <form string="Confirm Product Inventory Excel Report">
+                    <p class="oe_grey">
+                        Are You Sure,You Want to Generate The Product Inventory Excel Report.
+                    </p>
+                    <footer>
+                        <button string="Generate Excel Report" name="generate_excel_report" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_product_inventory_excel_report"
+            multi="True"
+            key2="client_action_multi" name="Generate Excel Report"
+            res_model="stock.move.line.excel.report.confirm" src_model="stock.move.line"
+            view_mode="form" target="new" view_type="form" />
+    </data>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="resignation_reason_form_view" model="ir.ui.view">
+            <field name="name">resignation.reason.form.view</field>
+            <field name="model">resignation.reason</field>
+            <field name="arch" type="xml">
+                <form string="Resignation Reason Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="resignation_reason_tree_view" model="ir.ui.view">
+            <field name="name">resignation.reason.tree.view</field>
+            <field name="model">resignation.reason</field>
+            <field name="arch" type="xml">
+                <tree string="Resignation Reason Tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="resignation_reason_act_window" model="ir.actions.act_window">
+            <field name="name">Resignation Reason</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">resignation.reason</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Master Data"
+                  id="hr_master_menu_root"
+                  parent="hr_menus.hr_menus"
+                  sequence="100" active="False"/>
+
+        <menuitem name="Resignation Reason" id="resignation_reason_menu"
+                  parent="fastra_hr_customize.hr_master_menu_root" action="resignation_reason_act_window"/>
+
+    </data>
+</odoo>
