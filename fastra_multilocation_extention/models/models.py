@@ -29,9 +29,7 @@ class AlmMultiLocation(models.Model):
         super(AlmMultiLocation,
               self)._get_destination_location()  # to overide the _get_destination_location in the purchase.order module
 
-        self.ensure_one()
-        if self.account_analytic_id.location:
-            return self.account_analytic_id.location.id
+        self.ensure_one()       
         return self.picking_type_id.default_location_dest_id.id
 
 
